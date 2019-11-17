@@ -5,12 +5,4 @@
     ...Loading...
 </p>
 
-<script>
-
-    $(document).ready(function(){
-        getHome(); 
-    });
-
-</script>
-
 @endsection
