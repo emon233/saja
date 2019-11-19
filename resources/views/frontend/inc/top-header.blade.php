@@ -16,8 +16,7 @@
                     <div class="login-search-area d-flex align-items-center">
                         <!-- Login -->
                         <div class="login d-flex">
-                            <a href="{{ route('login') }}">Login</a>
-                            <a href="{{ route('register') }}">Register</a>
+
                         </div>
                     </div>
                 </div>
