@@ -18,7 +18,9 @@
             <div class="card">
                 <div class="card-body">
                     <ul>
-                        <li><a href="{{ route('papers.index') }}">New Submitted Papers</a></li>
+                        <li><a href="{{ route('papers.editor.new') }}">New Submitted Papers({{ $new }})</a></li>
+                        <li><a href="{{ route('papers.editor.reviewing') }}">Reviewing Papers({{ $new }})</a></li>
+                        <li><a href="{{ route('papers.index') }}">All Submitted Papers({{ $all }})</a></li>
                     </ul>
                 </div>
             </div>

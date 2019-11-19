@@ -20,7 +20,7 @@ class Reviewer extends Model
 
     public static function isReviewer()
     {
-        if (empty(Session::get('isReviewer'))) {
+        if (!Session::get('isReviewer')) {
             $user = Reviewer::where([['user_id', '=', Auth::id()], ['status', '=', 1]])->first();
             if (empty($user)) {
                 return false;

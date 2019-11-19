@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Session;
 use Closure;
 
 use App\Models\Reviewer;
@@ -17,7 +18,7 @@ class ReviewerMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!Reviewer::isReviewer()) {
+        if (Session::get('role') != config('appConstants.roles.reviewer')) {
             return abort(403);
         }
         return $next($request);

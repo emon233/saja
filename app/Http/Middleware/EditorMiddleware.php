@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Session;
 use Closure;
 
 use App\Models\Editor;
@@ -17,7 +18,7 @@ class EditorMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!Editor::isEditor()) {
+        if (Session::get('role') != config('appConstants.roles.editor')) {
             return abort(403);
         }
         return $next($request);

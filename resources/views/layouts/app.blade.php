@@ -93,10 +93,12 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
                                         <a class="dropdown-item" href="{{ route('home') }}">
                                             <i class="fa fa-tachometer"></i>
                                             {{ Session::get('role') }} Dashboard
                                         </a>
+
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ route('users.profile') }}">
                                             <i class="fa fa-user"></i>
@@ -134,6 +136,16 @@
             <div class="row justify-content-center" style="background-color:lightcoral;">
                 <div class="col-md-12">
                     <p style="text-align:center; color:black; font-weight:bolder;">{{ Session::get('error') }}</p>
+                </div>
+            </div>
+        </div>
+        <br>
+        @endif
+        @if(Session::has('success'))
+        <div class="container">
+            <div class="row justify-content-center" style="background-color:lightgreen;">
+                <div class="col-md-12">
+                    <p style="text-align:center; color:black; font-weight:bolder;">{{ Session::get('success') }}</p>
                 </div>
             </div>
         </div>

@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <ul>
                         <li><a href="{{ route('papers.create') }}">New Submission</a></li>
-                        <li><a href="{{ route('papers.submitted') }}">Submitted Papers ({{ $submitted }})</a></li>
+                        <li><a href="{{ route('papers.author.submitted') }}">Submitted Papers ({{ $submitted }})</a></li>
                     </ul>
                 </div>
             </div>

@@ -29,10 +29,40 @@ class PaperController extends Controller
     public function index()
     {
         $papers = Paper::all();
-
+        $type = config('appConstants.titles.editor_all');
         return view(
             'papers.index',
-            compact('papers')
+            compact('papers', 'type')
+        );
+    }
+
+    /**
+     * All New Papers for Editor
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index_editor_new()
+    {
+        $papers = Paper::where('status', config('appConstants.status.new'))->get();
+        $type = config('appConstants.titles.editor_new');
+        return view(
+            'papers.index',
+            compact('papers', 'type')
+        );
+    }
+
+    /**
+     * All Reviewing Papers for Editor
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index_editor_reviewing()
+    {
+        $papers = Paper::where('status', config('appConstants.status.reviewing'))->get();
+        $type = config('appConstants.titles.editor_reviewing');
+        return view(
+            'papers.index',
+            compact('papers', 'type')
         );
     }
 
@@ -41,13 +71,13 @@ class PaperController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index_submitted()
+    public function index_author_submitted()
     {
         $papers = Paper::where('user_id', auth()->id())->get();
-
+        $type = config('appConstants.titles.author_all');
         return view(
-            'papers.submitted',
-            compact('papers')
+            'papers.index',
+            compact('papers', 'type')
         );
     }
 

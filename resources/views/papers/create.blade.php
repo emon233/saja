@@ -6,7 +6,7 @@
         <h4>NEW SUBMISSION</h4>
     </div>
     <div class="col-lg-6 col-md-6 mb-4">
-        <a href="{{ route('papers.submitted') }}" class="btn btn-primary float-right">Index</a>
+        <a href="{{ route('papers.author.submitted') }}" class="btn btn-primary float-right">Index</a>
     </div>
 </div>
 <br>

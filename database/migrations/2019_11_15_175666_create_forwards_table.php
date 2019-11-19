@@ -17,11 +17,12 @@ class CreateForwardsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('paper_id');
             $table->unsignedBigInteger('reviewer_id');
-            $table->date('from_date');
+            $table->date('from_date')->useCurrent();
             $table->date('to_date');
-            $table->boolean('status');
+            $table->string('status');
             $table->string('opinion_format')->nullable();
             $table->string('manuscript')->nullable();
+            $table->text('comments', 2000)->nullable();
             $table->timestamps();
 
             $table->foreign('paper_id')

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Forward extends Model
 {
     protected $fillable = [
-        'from_date', 'to_date', 'status', 'opinion_format', 'manuscript'
+        'from_date', 'to_date', 'status', 'opinion_format', 'manuscript', 'comments'
     ];
 
     public function paper()
