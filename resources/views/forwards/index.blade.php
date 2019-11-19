@@ -13,26 +13,23 @@
             <table class="table table-condensed table-bordered">
                 <thead>
                     <th>#</th>
-                    <th>Discipline</th>
-                    <th>Article Type</th>
                     <th>Title</th>
+                    <th>Manuscript</th>
                     <th>Status</th>
                     <th>Action</th>
                 </thead>
                 <tbody>
-                    @foreach($papers as $paper)
+                    @foreach($forwards as $forward)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $paper->discipline->name }}</td>
-                        <td>{{ $paper->type->name }}</td>
-                        <td>{{ $paper->title }}</td>
-                        <td>{{ $paper->status }}</td>
+                        <td>{{ $forward->paper->title }}</td>
                         <td>
-                            <a href="{{ route('papers.show', $paper->id) }}" class="info"><i class="fa fa-info-circle"></i></a>
+                            <a href="{{ Storage::url($forward->paper->manuscript) }}" target="_blank">{{ __('Download') }}</a>
+                        </td>
+                        <td>{{ $forward->status }}</td>
+                        <td>
+                            <a href="{{ route('forwards.show', $forward->id) }}" class="info"><i class="fa fa-info-circle"></i></a>
                             &nbsp;
-                            @if($paper->status == config('appConstants.status.new') && $paper->user_id == auth()->id())
-                            <a href="{{ route('papers.edit', $paper->id) }}" class="edit"><i class="fa fa-edit"></i></a>
-                            @endif
                         </td>
                     </tr>
                     @endforeach

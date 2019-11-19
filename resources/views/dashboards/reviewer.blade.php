@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -10,7 +9,7 @@
             <div class="card">
                 <div class="card-body">
                     <ul>
-                        <a href="/">Home</a>
+                        <li><a href="{{ route('forwards.index') }}">Forwarded Papers({{ $forwards }})</a></li>
                     </ul>
                 </div>
             </div>

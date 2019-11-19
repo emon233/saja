@@ -8,6 +8,7 @@ use Session;
 use App\User;
 
 use App\Models\Paper;
+use App\Models\Forward;
 
 use Illuminate\Http\Request;
 
@@ -33,12 +34,20 @@ class HomeController extends Controller
         $role = Session::get('role');
 
         if ($role == "Editor") {
-            return view('dashboards.editor');
+            $all = count(Paper::all());
+            $new = count(Paper::where('status', config('appConstants.status.new'))->get());
+            return view(
+                'dashboards.editor',
+                compact('all', 'new')
+            );
         } elseif ($role == "Reviewer") {
-            return view('dashboards.reviewer');
+            $forwards = count(Forward::where('reviewer_id', auth()->id()));
+            return view(
+                'dashboards.reviewer',
+                compact('forwards')
+            );
         } elseif ($role == "Author") {
-            $submitted = Paper::where('user_id', Auth::id())->get();
-            $submitted = count($submitted);
+            $submitted = count(Paper::where('user_id', Auth::id())->get());
             return view(
                 'dashboards.author',
                 compact('submitted')

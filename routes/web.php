@@ -53,7 +53,10 @@ Route::delete('/types/{type}/delete', 'TypeController@destroy')->name('types.des
  * Papers Routes
  */
 Route::get('/papers', 'PaperController@index')->name('papers.index');
-Route::get('/papers/submitted', 'PaperController@index_submitted')->name('papers.submitted');
+Route::get('/papers/editor/new', 'PaperController@index_editor_new')->name('papers.editor.new');
+Route::get('/papers/editor/reviewing', 'PaperController@index_editor_reviewing')->name('papers.editor.reviewing');
+
+Route::get('/papers/author/submitted', 'PaperController@index_author_submitted')->name('papers.author.submitted');
 
 Route::get('/papers/create', 'PaperController@create')->name('papers.create');
 Route::post('/papers', 'PaperController@store')->name('papers.store');
@@ -61,3 +64,16 @@ Route::get('/papers/{paper}/show', 'PaperController@show')->name('papers.show');
 Route::get('/papers/{paper}/edit', 'PaperController@edit')->name('papers.edit');
 Route::put('/papers/{paper}/update', 'PaperController@update')->name('papers.update');
 Route::delete('/papers/{paper}/delete', 'PaperController@destroy')->name('papers.destroy');
+
+/**
+ * Forward Papers
+ */
+Route::get('/forwards', 'ForwardController@index')->name('forwards.index');
+Route::get('/forwards/{forward}/upload', 'ForwardController@index_upload')->name('forwards.upload.index');
+
+Route::get('/forwards/{paper}/create', 'ForwardController@create')->name('forwards.create');
+Route::post('/forwards', 'ForwardController@store')->name('forwards.store');
+Route::get('/forwards/{forward}', 'ForwardController@show')->name('forwards.show');
+Route::put('/forwards/{forward}/accept', 'ForwardController@accept')->name('forwards.accept');
+Route::put('/forwards/{forward}/reject', 'ForwardController@reject')->name('forwards.reject');
+Route::put('/forwards/{forward}/upload', 'ForwardController@upload')->name('forwards.upload');

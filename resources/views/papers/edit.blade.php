@@ -5,9 +5,6 @@
     <div class="col-lg-6 col-md-6 mb-4">
         <h4>EDIT SUBMISSION</h4>
     </div>
-    <div class="col-lg-6 col-md-6 mb-4">
-        <a href="{{ route('papers.submitted') }}" class="btn btn-primary float-right">Index</a>
-    </div>
 </div>
 <br>
 <div class="row justify-content-center">
@@ -141,7 +138,7 @@
                         <label for="manuscript" class="col-md-4 col-form-label text-md-right">{{ __('Upload Manuscript') }}</label>
 
                         <div class="col-md-8">
-                            <input id="manuscript" type="file" class="form-control @error('manuscript') is-invalid @enderror" name="manuscript" value="{{ old('manuscript') }}" >
+                            <input id="manuscript" type="file" class="form-control @error('manuscript') is-invalid @enderror" name="manuscript" value="{{ old('manuscript') }}">
 
                             @error('manuscript')
                             <span class="invalid-feedback" role="alert">
