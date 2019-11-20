@@ -28,8 +28,67 @@ class ForwardController extends Controller
      */
     public function index()
     {
-        $forwards = Forward::where([['reviewer_id', auth()->id()], ['status', config('appConstants.forwards.forwarded')]])->get();
+        $forwards = Forward::where('reviewer_id', auth()->id())->get();
+        $type = config('appConstants.titles.reviewer_all');
+        return view(
+            'forwards.index',
+            compact('forwards', 'type')
+        );
+    }
+
+    public function index_new()
+    {
+        $forwards = Forward::where([['reviewer_id', auth()->id()], ['status', config('appConstants.forwards.new')]])->get();
         $type = config('appConstants.titles.reviewer_new');
+
+        return view(
+            'forwards.index',
+            compact('forwards', 'type')
+        );
+    }
+
+    /**
+     * All Accepted Papers by Reviewer
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index_accepted()
+    {
+        $forwards = Forward::where([['reviewer_id', auth()->id()], ['status', config('appConstants.forwards.accepted')]])->get();
+        $type = config('appConstants.titles.reviewer_accepted');
+
+        return view(
+            'forwards.index',
+            compact('forwards', 'type')
+        );
+    }
+
+    /**
+     * All Rejected Papers by Reviewer
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index_rejected()
+    {
+        $forwards = Forward::where([['reviewer_id', auth()->id()], ['status', config('appConstants.forwards.rejected')]])->get();
+        $type = config('appConstants.titles.reviewer_rejected');
+
+        return view(
+            'forwards.index',
+            compact('forwards', 'type')
+        );
+    }
+
+    /**
+     * All Reviewed Papers by Reviewer
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index_reviewed()
+    {
+        $forwards = Forward::where([['reviewer_id', auth()->id()], ['status', config('appConstants.forwards.reviewed')]])->get();
+        $type = config('appConstants.titles.reviewer_reviewed');
+
         return view(
             'forwards.index',
             compact('forwards', 'type')
@@ -127,7 +186,7 @@ class ForwardController extends Controller
      * @param Forward $forward
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function accept(Request $request, Forward $forward)
+    public function accept(Forward $forward)
     {
         $forward->status = config('appConstants.forwards.accepted');
         $forward->save();
@@ -153,8 +212,21 @@ class ForwardController extends Controller
         return redirect()->route('home');
     }
 
+    /**
+     * Upload Reviewed Manuscript
+     *
+     * @param Request $request
+     * @param Forward $forward
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function upload(Request $request, Forward $forward)
-    { 
-        
+    {
+        $this->validate($request, [
+            'opinion_format' => 'required|file|mimes:doc,docx|max:5000',
+            'manuscript' => 'required|file|mimes:doc,docx|max:5000'
+        ]);
     }
+
+    public function uploadFile($file)
+    { }
 }

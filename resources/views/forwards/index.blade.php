@@ -30,6 +30,9 @@
                         <td>
                             <a href="{{ route('forwards.show', $forward->id) }}" class="info"><i class="fa fa-info-circle"></i></a>
                             &nbsp;
+                            @if($forward->status == config('appConstants.forwards.accepted'))
+                            <a href="{{ route('forwards.upload', $forward->id) }}" class="upload"><i class="fa fa-upload"></i></a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach

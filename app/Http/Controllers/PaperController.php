@@ -67,6 +67,81 @@ class PaperController extends Controller
     }
 
     /**
+     * All Reviewed Papers for Editor
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index_editor_reviewed()
+    {
+        $papers = Paper::where('status', config('appConstants.status.reviewed'))->get();
+        $type = config('appConstants.titles.editor_reviewed');
+        return view(
+            'papers.index',
+            compact('papers', 'type')
+        );
+    }
+
+    /**
+     * All Revisioning Papers for Editor
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index_editor_revisioning()
+    {
+        $papers = Paper::where('status', config('appConstants.status.revisioning'))->get();
+        $type = config('appConstants.titles.editor_revisioning');
+        return view(
+            'papers.index',
+            compact('papers', 'type')
+        );
+    }
+
+    /**
+     * All Revisioned Papers for Editor
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index_editor_revisioned()
+    {
+        $papers = Paper::where('status', config('appConstants.status.revisioned'))->get();
+        $type = config('appConstants.titles.editor_revisioned');
+        return view(
+            'papers.index',
+            compact('papers', 'type')
+        );
+    }
+
+    /**
+     * All Processing Papers for Editor
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index_editor_processing()
+    {
+        $papers = Paper::where('status', config('appConstants.status.processing'))->get();
+        $type = config('appConstants.titles.editor_processing');
+        return view(
+            'papers.index',
+            compact('papers', 'type')
+        );
+    }
+
+    /**
+     * All Published Papers for Editor
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index_editor_published()
+    {
+        $papers = Paper::where('status', config('appConstants.status.published'))->get();
+        $type = config('appConstants.titles.editor_published');
+        return view(
+            'papers.index',
+            compact('papers', 'type')
+        );
+    }
+
+    /**
      * Submitted Paper List by Author
      *
      * @return \Illuminate\View\View

@@ -3,9 +3,10 @@
 
 <div class="row justify-content-center">
     <div class="col-lg-6 col-md-6 mb-4">
+        <h5 class="text-center">UPLOAD REVIEW</h5>
         <div class="card">
             <div class="card-body">
-                <form method="post" action="{{ route('forwards.upload', $forward->id) }}">
+                <form method="post" action="{{ route('forwards.upload', $forward->id) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group row">
@@ -36,7 +37,7 @@
                             <strong class="instruction-msg"></strong>
                         </div>
                     </div>
-                    <input type="submit" class="btn btn-primary float-right" onclick="return confirm('Are you sure?')" value="SUBMIT">
+                    <input type="submit" class="btn btn-primary float-right" onclick="return confirm('Are you sure?')" value="UPLOAD">
                 </form>
             </div>
         </div>

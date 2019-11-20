@@ -44,6 +44,7 @@
                         <a href="{{ Storage::url($forward->paper->manuscript) }}" target="_blank">{{ __('Download') }}</a>
                     </label>
                 </label>
+                @if($forward->status != config('appConstants.forwards.accepted'))
                 <hr>
                 <div class="row justify-content-center">
                     <div class="col-lg-3 col-md-3 mb-4">
@@ -62,8 +63,8 @@
                             <input type="submit" class="btn btn-danger float-right" onclick="return confirm('Are you sure?')" value="Reject">
                         </form>
                     </div>
-
                 </div>
+                @endif
             </div>
         </div>
     </div>

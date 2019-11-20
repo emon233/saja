@@ -7,7 +7,7 @@
                     <div class="logo">
                         <a href="/" style="color:#fff;"><img src="{{ asset('frontend/logo.jpg') }}"></a>
                     </div>
-                    <div>
+                    <div style="padding-top:20px; padding-bottom:20px;">
                         <h4 style="color: #fff;font-size: 34px;font-weight: bold;">South Asian Journal of Agriculture (SAJA)</h4>
                         <h6 class="text-center">ISSN: 1991-0037</h6>
                         <h5 class="text-center" style="color: #fff;">Open Access Peer Reviewed Journal</h5>
