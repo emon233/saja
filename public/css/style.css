@@ -9,3 +9,7 @@ a.edit {
 a.delete {
     color: red;
 }
+
+a.upload {
+    color: peru;
+}

@@ -36,15 +36,34 @@ class HomeController extends Controller
         if ($role == "Editor") {
             $all = count(Paper::all());
             $new = count(Paper::where('status', config('appConstants.status.new'))->get());
+            $reviewing = count(Paper::where('status', config('appConstants.status.reviewing'))->get());
+            $reviewed = count(Paper::where('status', config('appConstants.status.reviewed'))->get());
+            $revisioning = count(Paper::where('status', config('appConstants.status.revisioning'))->get());
+            $revisioned = count(Paper::where('status', config('appConstants.status.revisioned'))->get());
+            $processing = count(Paper::where('status', config('appConstants.status.processing'))->get());
+            $published = count(Paper::where('status', config('appConstants.status.published'))->get());
             return view(
                 'dashboards.editor',
-                compact('all', 'new')
+                compact(
+                    'all',
+                    'new',
+                    'reviewing',
+                    'reviewed',
+                    'revisioning',
+                    'revisioned',
+                    'processing',
+                    'published'
+                )
             );
         } elseif ($role == "Reviewer") {
-            $forwards = count(Forward::where('reviewer_id', auth()->id()));
+            $all = count(Forward::where('reviewer_id', auth()->id())->get());
+            $new = count(Forward::where([['reviewer_id', auth()->id()], ['status', config('appConstants.forwards.new')]])->get());
+            $accepted = count(Forward::where([['reviewer_id', auth()->id()], ['status', config('appConstants.forwards.accepted')]])->get());
+            $rejected = count(Forward::where([['reviewer_id', auth()->id()], ['status', config('appConstants.forwards.rejected')]])->get());
+            $reviewed = count(Forward::where([['reviewer_id', auth()->id()], ['status', config('appConstants.forwards.reviewed')]])->get());
             return view(
                 'dashboards.reviewer',
-                compact('forwards')
+                compact('all', 'new', 'accepted', 'rejected', 'reviewed')
             );
         } elseif ($role == "Author") {
             $submitted = count(Paper::where('user_id', Auth::id())->get());
