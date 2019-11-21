@@ -109,12 +109,12 @@
                         <h6 class="text-center">FILES - REVIEWED SUBMISSIONS</h6>
                     </div>
                 </div>
-                @foreach($paper->forwards as $forward)
+                @foreach($paper->forwards as $key=>$forward)
                 @if($forward->opinion_format != "")
                 <div class="row justify-content-center">
                     <div class="col-lg-6 col-md-6 mb-4">
                         <div class="form-group row">
-                            <label for="opinion_format" class="col-md-6 col-form-label text-md-right">{{ __('Opinion Format') }}</label>
+                            <label for="opinion_format" class="col-md-6 col-form-label text-md-right">{{ __('Opinion Format ').($key+1) }}</label>
                             <label for="opinion_format" class="col-md-6 col-form-label text-md-left">
                                 <a href="{{ Storage::url($forward->opinion_format) }}" target="_blank">{{ __('Download') }}</a>
                             </label>
@@ -122,7 +122,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6 mb-4">
                         <div class="form-group row">
-                            <label for="manuscript" class="col-md-6 col-form-label text-md-right">{{ __('Reviewed Manuscript') }}</label>
+                            <label for="manuscript" class="col-md-6 col-form-label text-md-right">{{ __('Reviewed Manuscript ').($key+1) }}</label>
                             <label for="manuscript" class="col-md-6 col-form-label text-md-left">
                                 <a href="{{ Storage::url($forward->manuscript) }}" target="_blank">{{ __('Download') }}</a>
                             </label>
@@ -131,6 +131,76 @@
                 </div>
                 @endif
                 @endforeach
+                @endif
+                @if($paper->status == config('appConstants.status.reviewing') && Session::get('role') == config('appConstants.roles.editor'))
+                <hr>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 mb-4">
+                        <form method="post" action="{{ route('papers.reviewed', $paper->id) }}">
+                            @csrf
+                            @method('PUT')
+                            <input type="submit" class="btn btn-warning float-right" onclick="return confirm('Are you sure?')" value="MARK AS REVIEWED">
+                        </form>
+                    </div>
+                </div>
+                @endif
+                @if($paper->status != config('appConstants.status.new'))
+                <hr>
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-6 mb-4">
+                        <h6 class="text-center">FILES - REVISIONED SUBMISSIONS</h6>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-6 mb-4">
+                        <div class="form-group row">
+                            <label for="edited_manuscript" class="col-md-6 col-form-label text-md-right">{{ __('Edited Manuscript') }}</label>
+
+                            @if(!empty($paper->edited_manuscript))
+                            <label for="edited_manuscript" class="col-md-6 col-form-label text-md-left">
+                                <a href="{{ Storage::url($paper->edited_manuscript) }}" target="_blank">{{ __('Download') }}</a>
+                            </label>
+                            @endif
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="declaration_letter" class="col-md-6 col-form-label text-md-right">{{ __('Declaration Letter') }}</label>
+                            @if(!empty($paper->declaration_letter))
+                            <label for="declaration_letter" class="col-md-6 col-form-label text-md-left">
+                                <a href="{{ Storage::url($paper->declaration_letter) }}" target="_blank">{{ __('Download') }}</a>
+                            </label>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 mb-4">
+                        <div class="form-group row">
+                            <label for="correction" class="col-md-6 col-form-label text-md-right">{{ __('Point by Point Correction') }}</label>
+
+                            @if(!empty($paper->correction))
+                            <label for="correction" class="col-md-6 col-form-label text-md-left">
+                                <a href="{{ Storage::url($paper->correction) }}" target="_blank">{{ __('Download') }}</a>
+                            </label>
+                            @endif
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="payment_slip" class="col-md-6 col-form-label text-md-right">{{ __('Payment Slip') }}</label>
+                            @if(!empty($paper->payment_slip))
+                            <label for="payment_slip" class="col-md-6 col-form-label text-md-left">
+                                <a href="{{ Storage::url($paper->payment_slip) }}" target="_blank">{{ __('Download') }}</a>
+                            </label>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @endif
+                @if($paper->status == config('appConstants.status.reviewed') && $paper->user_id == auth()->id())
+                <hr>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 mb-4">
+                        <a href="{{ route('papers.author.revision', $paper->id) }}" class="btn btn-warning float-right">UPLOAD REVISION</a>
+                    </div>
+                </div>
                 @endif
             </div>
             @if($paper->status == config('appConstants.status.new') && $paper->user_id == auth()->id())

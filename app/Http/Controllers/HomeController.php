@@ -57,7 +57,7 @@ class HomeController extends Controller
             );
         } elseif ($role == "Reviewer") {
             $all = count(Forward::where('reviewer_id', auth()->id())->get());
-            $new = count(Forward::where([['reviewer_id', auth()->id()], ['status', config('appConstants.forwards.new')]])->get());
+            $new = count(Forward::where([['reviewer_id', auth()->id()], ['status', config('appConstants.forwards.forwarded')]])->get());
             $accepted = count(Forward::where([['reviewer_id', auth()->id()], ['status', config('appConstants.forwards.accepted')]])->get());
             $rejected = count(Forward::where([['reviewer_id', auth()->id()], ['status', config('appConstants.forwards.rejected')]])->get());
             $reviewed = count(Forward::where([['reviewer_id', auth()->id()], ['status', config('appConstants.forwards.reviewed')]])->get());
@@ -67,9 +67,14 @@ class HomeController extends Controller
             );
         } elseif ($role == "Author") {
             $submitted = count(Paper::where('user_id', Auth::id())->get());
+            $reviewing = count(Paper::where([['user_id', auth()->id()], ['status', config('appConstants.status.reviewing')]])->get());
+            $reviewed = count(Paper::where([['user_id', auth()->id()], ['status', config('appConstants.status.reviewed')]])->get());
+            $revisioned = count(Paper::where([['user_id', auth()->id()], ['status', config('appConstants.status.revisioned')]])->get());
+            $processing = count(Paper::where([['user_id', auth()->id()], ['status', config('appConstants.status.processing')]])->get());
+            $published = count(Paper::where([['user_id', auth()->id()], ['status', config('appConstants.status.published')]])->get());
             return view(
                 'dashboards.author',
-                compact('submitted')
+                compact('submitted', 'reviewing', 'reviewed', 'revisioned', 'processing', 'published')
             );
         }
     }

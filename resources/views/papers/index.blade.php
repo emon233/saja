@@ -33,6 +33,9 @@
                             @if($paper->status == config('appConstants.status.new') && $paper->user_id == auth()->id())
                             <a href="{{ route('papers.edit', $paper->id) }}" class="edit"><i class="fa fa-edit"></i></a>
                             @endif
+                            @if($paper->status == config('appConstants.status.reviewed') && $paper->user_id == auth()->id())
+                            <a href="{{ route('papers.author.revision', $paper->id) }}" class="upload"><i class="fa fa-upload"></i></a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach

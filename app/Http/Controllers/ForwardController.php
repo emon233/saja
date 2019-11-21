@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Session;
 
+use App\Upload;
+
 use App\Models\Paper;
 use App\Models\Forward;
 use App\Models\Reviewer;
@@ -38,7 +40,7 @@ class ForwardController extends Controller
 
     public function index_new()
     {
-        $forwards = Forward::where([['reviewer_id', auth()->id()], ['status', config('appConstants.forwards.new')]])->get();
+        $forwards = Forward::where([['reviewer_id', auth()->id()], ['status', config('appConstants.forwards.forwarded')]])->get();
         $type = config('appConstants.titles.reviewer_new');
 
         return view(
@@ -223,10 +225,37 @@ class ForwardController extends Controller
     {
         $this->validate($request, [
             'opinion_format' => 'required|file|mimes:doc,docx|max:5000',
-            'manuscript' => 'required|file|mimes:doc,docx|max:5000'
+            'manuscript' => 'required|file|mimes:doc,docx,zip,pdf|max:5000'
         ]);
+
+        $data = $request->all();
+        $names = ['opinion_format', 'manuscript'];
+
+        foreach ($names as $name) {
+            if (!empty($data[$name])) {
+                $manuscriptNo = Upload::generateReviewedNumber($forward, $data[$name], config('appConstants.types.' . $name));
+                $data[$name] = $this->uploadFile($data[$name], $manuscriptNo);
+            }
+        }
+
+        $data['status'] = config('appConstants.forwards.reviewed');
+
+        $forward->update($data);
+
+        return redirect()->route('forwards.index.reviewed');
     }
 
-    public function uploadFile($file)
-    { }
+    /**
+     * Upload a Manuscript
+     *
+     * @param [type] $manuscript
+     * @return string|null
+     */
+    protected function uploadFile($file, $fileNo)
+    {
+        if (!empty($file)) {
+            return $file->storeAs('', $fileNo, 'public');
+        }
+        return null;
+    }
 }
