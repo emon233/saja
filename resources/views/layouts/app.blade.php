@@ -52,7 +52,7 @@
 
                         <!-- Logo -->
                         <div class="logo">
-                            <a href="{{ url('/') }}"><img src="{{ asset('frontend/logo.jpg') }}" alt=""></a>
+                            <a href="{{ url('/') }}"><img src="{{ asset('frontend/logo.jpg') }}" alt="" style="height:70px; width:70px;"></a>
                         </div>
 
                         <!-- Navbar Toggler -->
