@@ -21,6 +21,8 @@ return [
         'revisioning' => 'REVISIONING',
         'revisioned' => 'REVISIONED',
         'processing' => 'PROCESSING',
+        'accepted' => 'ACCEPTED',
+        'rejected' => 'REJECTED',
         'published' => 'PUBLISHED'
     ],
 
@@ -36,11 +38,32 @@ return [
 
         'author_all' => 'ALL SUBMITTED PAPERS',
         'author_new' => 'NEW SUBMITTED PAPERS',
+        'author_reviewing' => 'PAPERS UNDER REVIEWING',
+        'author_reviewed' => 'REVIEWED PAPERS',
+        'author_revisioned' => 'REVISIONED PAPERS',
+        'author_processing' => 'PAPERS UNDER PROCESSING',
+        'author_published' => 'PUBLISHED PAPERS',
 
         'reviewer_new' => 'NEW FORWARDED PAPERS',
         'reviewer_accepted' => 'ALL ACCEPTED PAPERS',
         'reviewer_rejected' => 'ALL REJECTED PAPERS',
         'reviewer_reviewed' => 'ALL REVIEWED PAPERS',
         'reviewer_all' => 'ALL FORWARDED PAPERS'
+    ],
+
+    'types' => [
+        'manuscript' => 'Manuscript',
+        'title_page' => 'Title_Page',
+        'cover_letter' => 'Cover_Letter',
+        'check_list' => 'Check_List',
+        'processing_fee' => 'Processing_Fee',
+        'declaration_letter' => 'Declaration_Letter',
+        'correction' => 'Correction',
+        'payment_slip' => 'Payment_Slip',
+        'edited_manuscript' => 'Edited_Manuscript',
+        'galley_proof' => 'Galley_Proof',
+        'final_galley_proof' => 'Final_Galley_Proof',
+        'reviewed_manuscript' => 'Reviewed_Manuscript',
+        'opinion_format' => 'Opinion_Format'
     ],
 ];

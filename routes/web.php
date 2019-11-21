@@ -59,15 +59,31 @@ Route::get('/papers/editor/reviewed', 'PaperController@index_editor_reviewed')->
 Route::get('/papers/editor/revisioning', 'PaperController@index_editor_revisioning')->name('papers.editor.revisioning');
 Route::get('/papers/editor/revisioned', 'PaperController@index_editor_revisioned')->name('papers.editor.revisioned');
 Route::get('/papers/editor/processing', 'PaperController@index_editor_processing')->name('papers.editor.processing');
+Route::get('/papers/editor/galleyproof', 'PaperController@index_editor_galley_proof')->name('papers.editor.galleyproof');
 Route::get('/papers/editor/published', 'PaperController@index_editor_published')->name('papers.editor.published');
+Route::get('/papers/editor/accepted', 'PaperController@index_editor_accepted')->name('papers.editor.accepted');
+Route::get('/papers/editor/rejected', 'PaperController@index_editor_rejected')->name('papers.editor.rejected');
 
 Route::get('/papers/author/submitted', 'PaperController@index_author_submitted')->name('papers.author.submitted');
+Route::get('/papers/author/reviewing', 'PaperController@index_author_reviewing')->name('papers.author.reviewing');
+Route::get('/papers/author/reviewed', 'PaperController@index_author_reviewed')->name('papers.author.reviewed');
+Route::get('/papers/author/revisioned', 'PaperController@index_author_revisioned')->name('papers.author.revisioned');
+Route::get('/papers/author/processing', 'PaperController@index_author_processing')->name('papers.author.processing');
+Route::get('/papers/author/galleyproof', 'PaperController@index_author_galley_proof')->name('papers.author.galleyproof');
+Route::get('/papers/author/published', 'PaperController@index_author_published')->name('papers.author.published');
+Route::get('/papers/author/{paper}/revision', 'PaperController@index_author_revision')->name('papers.author.revision');
 
 Route::get('/papers/create', 'PaperController@create')->name('papers.create');
 Route::post('/papers', 'PaperController@store')->name('papers.store');
 Route::get('/papers/{paper}/show', 'PaperController@show')->name('papers.show');
 Route::get('/papers/{paper}/edit', 'PaperController@edit')->name('papers.edit');
 Route::put('/papers/{paper}/update', 'PaperController@update')->name('papers.update');
+Route::put('/papers/{paper}/uploadrevision', 'PaperController@uploadRevision')->name('papers.upload.revision');
+Route::put('/papers/{paper}/reviewed', 'PaperController@makeReviewed')->name('papers.reviewed');
+Route::put('/papers/{paper}/galleyproof', 'PaperController@uploadGalleyProof')->name('papers.galleyproof');
+Route::put('/papers/{paper}/finalproof', 'PaperController@uploadFinalProof')->name('papers.final.proof');
+Route::put('/papers/{paper}/accept', 'PaperController@accept')->name('papers.accept');
+Route::put('/papers/{paper}/reject', 'PaperController@reject')->name('papers.reject');
 Route::delete('/papers/{paper}/delete', 'PaperController@destroy')->name('papers.destroy');
 
 /**
