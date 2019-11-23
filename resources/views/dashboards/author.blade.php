@@ -15,10 +15,13 @@
                         <li><a href="{{ route('papers.author.reviewing') }}">Papers Under Review ({{ $reviewing }})</a></li>
                         <li><a href="{{ route('papers.author.reviewed') }}">Reviewed Papers ({{ $reviewed }})</a></li>
                         <li><a href="{{ route('papers.author.revisioned') }}">Revisioned Papers ({{ $revisioned }})</a></li>
+                        <li>&nbsp;</li>
+                        <li><a href="{{ route('papers.author.accepted') }}">Accepted Papers ({{ $accepted }})</a></li>
                         <li><a href="{{ route('papers.author.processing') }}">Papers Under Processing ({{ $processing }})</a></li>
                         <li>&nbsp;</li>
                         <li><a href="{{ route('papers.author.submitted') }}">Submitted Papers ({{ $submitted }})</a></li>
-                        <li><a href="{{ route('papers.author.published') }}">Published Papers ({{ $processing }})</a></li>
+                        <li><a href="{{ route('papers.author.published') }}">Published Papers ({{ $published }})</a></li>
+                        <li><a href="{{ route('papers.author.rejected') }}">Rejected Papers ({{ $rejected }})</a></li>
                     </ul>
                 </div>
             </div>

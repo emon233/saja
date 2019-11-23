@@ -16,6 +16,9 @@
                     <th>Discipline</th>
                     <th>Article Type</th>
                     <th>Title</th>
+                    @if(Session::get('role') == config('appConstants.roles.editor'))
+                    <th>Author</th>
+                    @endif
                     <th>Status</th>
                     <th>Action</th>
                 </thead>
@@ -26,6 +29,9 @@
                         <td>{{ $paper->discipline->name }}</td>
                         <td>{{ $paper->type->name }}</td>
                         <td>{{ $paper->title }}</td>
+                        @if(Session::get('role') == config('appConstants.roles.editor'))
+                        <td>{{ $paper->user->first_name . ' ' . $paper->user->last_name}}</td>
+                        @endif
                         <td>{{ $paper->status }}</td>
                         <td>
                             <a href="{{ route('papers.show', $paper->id) }}" class="info"><i class="fa fa-info-circle"></i></a>

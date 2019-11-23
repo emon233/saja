@@ -71,15 +71,15 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li class="{{ (Request::is('/') ? 'active' : '') }}"><a href="{{ route('front') }}">Home</a></li>
-                                    <li class="{{ (Request::is('authors-guideline') ? 'active' : '') }}"><a href="#">Authors Guideline</a></li>
-                                    <li class="{{ (Request::is('editorial-board') ? 'active' : '') }}"><a href="#">Editorial Board</a></li>
-                                    <li class="{{ (Request::is('publication-fee') ? 'active' : '') }}"><a href="#">Publication Fee</a></li>
-                                    <li class="{{ (Request::is('payment-method') ? 'active' : '') }}"><a href="#">Payment Method</a></li>
-                                    <li class="{{ (Request::is('publication-ethics') ? 'active' : '') }}"><a href="#">Publication Ethics</a></li>
-                                    <li class="{{ (Request::is('contact') ? 'active' : '') }}"><a href="#">Contact</a></li>
-                                    <li class="{{ (Request::is('archives') ? 'active' : '') }}"><a href="#">Archives</a></li>
-                                    <li class="{{ (Request::is('important-links') ? 'active' : '') }}"><a href="#">Important Links</a></li>
+                                    <li><a href="{{ route('front') }}">Home</a></li>
+                                    <li><a href="{{ route('index.authors_guideline') }}">Authors Guideline</a></li>
+                                    <li><a href="{{ route('index.editorial_board') }}">Editorial Board</a></li>
+                                    <li><a href="{{ route('index.publication_fees') }}">Publication Fee</a></li>
+                                    <li><a href="{{ route('index.payment_method') }}">Payment Method</a></li>
+                                    <li><a href="{{ route('index.publication_ethics') }}">Publication Ethics</a></li>
+                                    <li><a href="{{ route('index.contact') }}">Contact</a></li>
+                                    <li><a href="#">Archives</a></li>
+                                    <li><a href="{{ route('index.links') }}">Important Links</a></li>
                                     <!-- Authentication Links -->
                                     @guest
                                     <li class="{{ (Request::is('important-links') ? 'active' : '') }}">

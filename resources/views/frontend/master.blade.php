@@ -75,14 +75,14 @@
                             <div class="classynav">
                                 <ul>
                                     <li><a href="{{ route('front') }}">Home</a></li>
-                                    <li><a href="#">Authors Guideline</a></li>
-                                    <li><a href="#">Editorial Board</a></li>
-                                    <li><a href="#">Publication Fee</a></li>
-                                    <li><a href="#">Payment Method</a></li>
-                                    <li><a href="#}">Publication Ethics</a></li>
-                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="{{ route('index.authors_guideline') }}">Authors Guideline</a></li>
+                                    <li><a href="{{ route('index.editorial_board') }}">Editorial Board</a></li>
+                                    <li><a href="{{ route('index.publication_fees') }}">Publication Fee</a></li>
+                                    <li><a href="{{ route('index.payment_method') }}">Payment Method</a></li>
+                                    <li><a href="{{ route('index.publication_ethics') }}">Publication Ethics</a></li>
+                                    <li><a href="{{ route('index.contact') }}">Contact</a></li>
                                     <li><a href="#">Archives</a></li>
-                                    <li><a href="#">Important Links</a></li>
+                                    <li><a href="{{ route('index.links') }}">Important Links</a></li>
                                     <!-- Authentication Links -->
                                     @guest
                                     <li class="{{ (Request::is('important-links') ? 'active' : '') }}">
@@ -139,17 +139,16 @@
     <!-- ##### Hero Area End ##### -->
 
     <!-- ##### Popular News Area Start ##### -->
-    <div class="popular-news-area section-padding-80-50">
+    <div class="popular-news-area" style="padding-top:20px;">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-4">
                     <div class="list-group">
-                        <a href="/register" class="list-group-item active"><i class="fa fa-key"></i> <span>Online Submission System</span></a>
-                        <a href="/login" class="list-group-item"><i class="fa fa-credit-card"></i> <span>Article Tracking System</span></a>
-                        <a href="#" class="list-group-item"><i class="fa fa-question-circle"></i> <span>Publication Ethics</span></a>
-                        <a href="#" class="list-group-item"><i class="fa fa-arrow-circle-o-left"></i> <span>Editorial Board</span></a>
-                        <a href="#" class="list-group-item"><i class="fa fa-arrow-circle-o-right"></i> <span>Current Issue</span></a>
-
+                        <a href="{{ route('register') }}" class="list-group-item active"><i class="fa fa-key"></i> <span>Online Submission System</span></a>
+                        <a href="{{ route('login') }}" class="list-group-item"><i class="fa fa-credit-card"></i> <span>Article Tracking System</span></a>
+                        <a href="{{ route('index.publication_ethics') }}" class="list-group-item"><i class="fa fa-question-circle"></i> <span>Publication Ethics</span></a>
+                        <a href="{{ route('index.editorial_board') }}" class="list-group-item"><i class="fa fa-arrow-circle-o-left"></i> <span>Editorial Board</span></a>
+                        <a href="{{ route('index.current_issue') }}" class="list-group-item"><i class="fa fa-arrow-circle-o-right"></i> <span>Current Issue</span></a>
                     </div>
                 </div>
                 <div class="col-12 col-lg-8">

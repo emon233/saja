@@ -2,15 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Auth;
 use Session;
 use Storage;
 
+use App\User;
 use App\Upload;
 
 use App\Models\Type;
 use App\Models\Paper;
 use App\Models\Discipline;
+
+use App\Mail\AuthorNew;
+use App\Mail\AuthorAccept;
+use App\Mail\AuthorReject;
+use App\Mail\AuthorGalley;
+use App\Mail\AuthorReviewed;
+use App\Mail\AuthorRevisioned;
+use App\Mail\AuthorCheckedGalley;
+use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Http\Request;
 
@@ -160,6 +171,20 @@ class PaperController extends Controller
     }
 
     /**
+     * Upload Galley Proof Index
+     *
+     * @param Paper $paper
+     * @return \Illuminate\View\View
+     */
+    public function index_editor_galley_proof(Paper $paper)
+    {
+        return view(
+            'papers.galleyproves',
+            compact('paper')
+        );
+    }
+
+    /**
      * All Published Papers for Editor
      *
      * @return \Illuminate\View\View
@@ -249,6 +274,50 @@ class PaperController extends Controller
     }
 
     /**
+     * Accepted Papers List for Author
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index_author_accepted()
+    {
+        $papers = Paper::where([['user_id', auth()->id()], ['status', config('appConstants.status.accepted')]])->get();
+        $type = config('appConstants.titles.author_accepted');
+        return view(
+            'papers.index',
+            compact('papers', 'type')
+        );
+    }
+
+    /**
+     * Rejected Papers List for Author
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index_author_rejected()
+    {
+        $papers = Paper::where([['user_id', auth()->id()], ['status', config('appConstants.status.rejected')]])->get();
+        $type = config('appConstants.titles.author_rejected');
+        return view(
+            'papers.index',
+            compact('papers', 'type')
+        );
+    }
+
+    /**
+     * Upload Final Galley Proof
+     *
+     * @param Paper $paper
+     * @return \Illuminate\View\View
+     */
+    public function index_author_galley_proof(Paper $paper)
+    {
+        return view(
+            'papers.finalproves',
+            compact('paper')
+        );
+    }
+
+    /**
      * Papers under Processing for Author
      *
      * @return \Illuminate\View\View
@@ -300,27 +369,39 @@ class PaperController extends Controller
     public function store(Request $request)
     {
         $this->storeValidation($request);
-        $Data = $request->all();
+        $data = $request->all();
 
-        $names = ['manuscript', 'check_list', 'cover_letter', 'title_page', 'processing_fee'];
+        DB::beginTransaction();
 
-        foreach ($names as $name) {
-            $file = $request->file($name);
-            if (!empty($file)) {
-                $fileName = Upload::generateNumber($file, config('appConstants.types.' . $name));
-                $Data[$name] = $this->uploadFile($file, $fileName);
+        try {
+
+            $names = ['manuscript', 'check_list', 'cover_letter', 'title_page', 'processing_fee'];
+
+            foreach ($names as $name) {
+                $file = $request->file($name);
+                if (!empty($file)) {
+                    $fileName = Upload::generateNumber($file, config('appConstants.types.' . $name));
+                    $data[$name] = $this->uploadFile($file, $fileName);
+                }
             }
+
+            $data['status'] = config('appConstants.status.new');
+
+            $paper = new Paper($data);
+            $paper->user_id = auth()->id();
+            $paper->discipline_id = $data['discipline'];
+            $paper->type_id = $data['type'];
+            $paper->save();
+
+            Mail::to($request->user())->send(new AuthorNew($paper));
+            DB::commit();
+            Session::flash('success', '*** Paper Submitted Successfully ***');
+            return redirect()->route('papers.show', $paper->id);
+        } catch (\Exception $ex) {
+            DB::rollback();
+            Session::flash('error', '!!! Something Went Wrong. Please Re-submit the Paper. !!!');
+            return redirect()->back();
         }
-
-        $Data['status'] = config('appConstants.status.new');
-
-        $paper = new Paper($Data);
-        $paper->user_id = auth()->id();
-        $paper->discipline_id = $Data['discipline'];
-        $paper->type_id = $Data['type'];
-        $paper->save();
-
-        return redirect()->route('papers.show', $paper->id);
     }
 
     /**
@@ -386,32 +467,75 @@ class PaperController extends Controller
      */
     public function makeReviewed(Paper $paper)
     {
-        $paper->status = config('appConstants.status.reviewed');
-        $paper->save();
+        DB::beginTransaction();
 
-        Session::flash('success', '*** Paper Status changed to ' . config('appConstants.status.reviewed') . ' ***');
-        return redirect()->route('papers.editor.reviewed');
+        try {
+            $paper->status = config('appConstants.status.reviewed');
+            $paper->save();
+
+            $author = User::find($paper->user_id)->email;
+
+            Mail::to($author)->send(new AuthorReviewed($paper));
+            DB::commit();
+            Session::flash('success', '*** Paper Status changed to ' . config('appConstants.status.reviewed') . ' ***');
+            return redirect()->route('papers.editor.reviewed');
+        } catch (\Exception $ex) {
+            DB::rollback();
+            Session::flash('error', $ex->getMessage());
+            return redirect()->back();
+        }
     }
 
+    /**
+     * Mark Paper as Published
+     *
+     * @param Request $request
+     * @param Paper $paper
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function makePublished(Request $request, Paper $paper)
+    {
+        $paper->status = config('appConstants.status.published');
+        $paper->save();
+
+        Session::flash('success', '*** Paper Status changed to ' . config('appConstants.status.published') . ' ***');
+        return redirect()->route('papers.editor.published');
+    }
+
+    /**
+     * Upload Revision by Correspondent Author
+     *
+     * @param Request $request
+     * @param Paper $paper
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function uploadRevision(Request $request, Paper $paper)
     {
         $this->revisionValidation($request);
-        $data = $request->all();
 
-        $names = ['declaration_letter', 'correction', 'payment_slip', 'edited_manuscript'];
+        DB::beginTransaction();
+        try {
+            $data = $request->all();
 
-        foreach ($names as $name) {
-            $file = $request->file($name);
-            if (!empty($file)) {
-                $fileName = Upload::generateNumberRevision($file, config('appConstants.types.' . $name), $paper);
-                $data[$name] = $this->uploadFile($file, $fileName);
+            $names = ['declaration_letter', 'correction', 'payment_slip', 'edited_manuscript'];
+
+            foreach ($names as $name) {
+                $file = $request->file($name);
+                if (!empty($file)) {
+                    $fileName = Upload::generateNumberRevision($file, config('appConstants.types.' . $name), $paper);
+                    $data[$name] = $this->uploadFile($file, $fileName);
+                }
             }
-        }
-        $data['status'] = config('appConstants.status.revisioned');
-        $paper->update($data);
+            $data['status'] = config('appConstants.status.revisioned');
+            $paper->update($data);
 
-        Session::flash('success', '*** Revision Uploaded Successfully ***');
-        return redirect()->route('papers.author.revisioned');
+            $user = User::find($paper->user_id)->email;
+            Mail::to($user)->send(new AuthorRevisioned($paper));
+            DB::commit();
+
+            Session::flash('success', '*** Revision Uploaded Successfully ***');
+            return redirect()->route('papers.author.revisioned');
+        } catch (\Exception $ex) { }
     }
 
     /**
@@ -424,21 +548,35 @@ class PaperController extends Controller
     public function uploadGalleyProof(Request $request, Paper $paper)
     {
         $this->validate($request, [
-            'galley_proof' => 'required|file|mimes:pdf|max:50000'
+            'galley_proof' => 'required|file|mimes:pdf|max:500000'
         ]);
 
-        $data = $request->all();
+        DB::beginTransaction();
 
-        $file = $request->file('galley_proof');
-        if (!empty($file)) {
-            $fileName = Upload::generateNumberRevision($file, config('appConstants.types.galley_proof'), $paper);
-            $data['galley_proof'] = $this->uploadFile($file, $fileName);
+        try {
+            $data = $request->all();
+
+            $file = $request->file('galley_proof');
+            if (!empty($file)) {
+                $fileName = Upload::generateNumberRevision($file, config('appConstants.types.galley_proof'), $paper);
+                $data['galley_proof'] = $this->uploadFile($file, $fileName);
+            }
+
+            $paper->update($data);
+            $paper->status = config('appConstants.status.processing');
+            $paper->save();
+
+            $user = User::find($paper->user_id)->email;
+            Mail::to($user)->send(new AuthorGalley($paper));
+            DB::commit();
+
+            Session::flash('success', '*** Galley Proof Successfully Uploaded ***');
+            return redirect()->route('papers.editor.processing');
+        } catch (\Exception $ex) {
+            DB::rollback();
+            Session::flash('error', $ex->getMessage());
+            return redirect()->back();
         }
-
-        $paper->update($data);
-        Session::flash('success', '*** Galley Proof Successfully Uploaded ***');
-
-        return redirect()->route('papers.editor.galleyProof');
     }
 
     /**
@@ -454,18 +592,30 @@ class PaperController extends Controller
             'final_galley_proof' => 'required|file|mimes:pdf|max:50000'
         ]);
 
-        $data = $request->all();
+        DB::beginTransaction();
+        try {
+            $data = $request->all();
 
-        $file = $request->file('final_galley_proof');
-        if (!empty($file)) {
-            $fileName = Upload::generateNumberRevision($file, config('appConstants.types.final_galley_proof'), $paper);
-            $data['final_galley_proof'] = $this->uploadFile($file, $fileName);
+            $file = $request->file('final_galley_proof');
+            if (!empty($file)) {
+                $fileName = Upload::generateNumberRevision($file, config('appConstants.types.final_galley_proof'), $paper);
+                $data['final_galley_proof'] = $this->uploadFile($file, $fileName);
+            }
+
+            $paper->update($data);
+
+            $user = User::find($paper->user_id)->email;
+            Mail::to($user)->send(new AuthorCheckedGalley($paper));
+            DB::commit();
+
+            Session::flash('success', '*** Final Galley Proof Successfully Uploaded ***');
+
+            return redirect()->route('papers.author.processing');
+        } catch (\Exception $ex) {
+            DB::rollback();
+            Session::flash('error', '!!! Something Went Wrong. Please Upload Again !!!');
+            return redirect()->back();
         }
-
-        $paper->update($data);
-        Session::flash('success', '*** Final Galley Proof Successfully Uploaded ***');
-
-        return redirect()->route('papers.author.galleyProof');
     }
 
     /**
@@ -477,11 +627,23 @@ class PaperController extends Controller
      */
     public function accept(Request $request, Paper $paper)
     {
-        $paper->status = config('appConstants.status.accepted');
-        $paper->save();
+        DB::beginTransaction();
 
-        Session::flash('success', '*** Paper Successfully Accepted ***');
-        return redirect()->route('papers.editor.accepted');
+        try {
+            $paper->status = config('appConstants.status.accepted');
+            $paper->save();
+
+            $user = User::find($paper->user_id)->email;
+            Mail::to($user)->send(new AuthorAccept($paper));
+            DB::commit();
+
+            Session::flash('success', '*** Paper Successfully Accepted ***');
+            return redirect()->route('papers.editor.accepted');
+        } catch (\Exception $ex) {
+            DB::rollback();
+            Session::flash('error', $ex->getMessage());
+            return redirect()->back();
+        }
     }
 
     /**
@@ -493,11 +655,23 @@ class PaperController extends Controller
      */
     public function reject(Request $request, Paper $paper)
     {
-        $paper->status = config('appConstants.status.rejected');
-        $paper->save();
+        DB::beginTransaction();
 
-        Session::flash('success', '*** Paper Successfully Rejected ***');
-        return redirect()->route('papers.editor.rejected');
+        try {
+            $paper->status = config('appConstants.status.rejected');
+            $paper->save();
+
+            $user = User::find($paper->user_id)->email;
+            Mail::to($user)->send(new AuthorReject($paper));
+            DB::commit();
+
+            Session::flash('success', '*** Paper Successfully Rejected ***');
+            return redirect()->route('papers.editor.rejected');
+        } catch (\Exception $ex) {
+            DB::rollback();
+            Session::flash('error', $ex->getMessage());
+            return redirect()->back();
+        }
     }
 
     /**

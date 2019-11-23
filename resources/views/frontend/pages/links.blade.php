@@ -1,34 +1,22 @@
 @extends('frontend.master')
-@section('css')
-<link rel="icon" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="icon" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
-@endsection
 @section('content')
-<h4>Important Links</h4>
-<br>
-<table class="table table-striped table-bordered" style="width:100%">
-    <tbody>
-        <tr>
-            <td>Check List</td>
-            <td><a href="/files/links/checklist.docx">Download</a></td>
-        </tr>
-        <tr>
-            <td>Declaration Letter</td>
-            <td><a href="/files/links/letter.doc">Download</a></td>
-        </tr>
-        <tr>
-            <td>Review Opinion Format</td>
-            <td><a href="/files/links/review.doc">Download</a></td>
-        </tr>
-        <tr>
-            <td>Title Page</td>
-            <td><a href="/files/links/title.docx">Download</a></td>
-        </tr>
-    </tbody>
-</table>
-@endsection
-@section('js')
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+<h6>IMPORTANT LINKS</h6>
+<div class="row">
+    <div class="col-lg-8 col-md-8 mb-4 float-left">
+        <div class="table table-responsive">
+            <table class="table table-bordered table-condensed float-left">
+                <tbody>
+                    @foreach($links as $link)
+                    <tr>
+                        <td>{{ $link->title }}</td>
+                        <td>
+                            <a href="{{ Storage::url($link->file) }}" target="_blank">{{ __('Download') }}</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 @endsection

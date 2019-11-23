@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Session;
 
+use App\User;
 use App\Upload;
 
 use App\Models\Paper;
 use App\Models\Forward;
 use App\Models\Reviewer;
+
+use App\Mail\ReviewerSending;
+use App\Mail\ReviewerReceiving;
+use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Http\Request;
 
@@ -140,31 +146,46 @@ class ForwardController extends Controller
             'reviewer' => 'required|exists:users,id',
             'to_date' => 'required|date'
         ]);
-        $paper = Paper::find($request['paper']);
 
-        if ($paper) {
-            foreach ($paper->forwards as $forward) {
-                if ($forward->reviewer_id == $request['reviewer']) {
-                    Session::flash('error', '!!! Selected Reviewer is already Assigned for this Paper !!!');
+        DB::beginTransaction();
+
+        try {
+
+            $paper = Paper::find($request['paper']);
+
+            if ($paper) {
+                foreach ($paper->forwards as $forward) {
+                    if ($forward->reviewer_id == $request['reviewer']) {
+                        Session::flash('error', '!!! Selected Reviewer is already Assigned for this Paper !!!');
+                        return redirect()->back();
+                    }
+                }
+
+                if ($paper->user_id == $request['reviewer']) {
+                    Session::flash('error', '!!! Selected Reviewer is the Author of this Paper !!!');
                     return redirect()->back();
                 }
+                $paper->status = config('appConstants.status.reviewing');
+                $paper->save();
             }
+            $forward = new Forward($request->all());
+            $forward->paper_id = $request['paper'];
+            $forward->reviewer_id = $request['reviewer'];
+            $forward->status = config('appConstants.forwards.forwarded');
+            $forward->save();
 
-            if ($paper->user_id == $request['reviewer']) {
-                Session::flash('error', '!!! Selected Reviewer is the Author of this Paper !!!');
-                return redirect()->back();
-            }
-            $paper->status = config('appConstants.status.reviewing');
-            $paper->save();
+            $reviewer = User::find($forward->reviewer_id)->email;
+
+            Mail::to($reviewer)->send(new ReviewerSending($forward));
+            DB::commit();
+
+            Session::flash('success', '*** Paper Successfully Assigned to Reviewer ***');
+            return redirect()->route('forwards.create', $request['paper']);
+        } catch (\Exception $ex) {
+            DB::rollback();
+            Session::flash('error', $ex->getMessage());
+            return redirect()->back();
         }
-        $forward = new Forward($request->all());
-        $forward->paper_id = $request['paper'];
-        $forward->reviewer_id = $request['reviewer'];
-        $forward->status = config('appConstants.forwards.forwarded');
-        $forward->save();
-
-        Session::flash('success', '*** Paper Successfully Assigned to Reviewer ***');
-        return redirect()->route('forwards.create', $request['paper']);
     }
 
     /**
@@ -228,21 +249,35 @@ class ForwardController extends Controller
             'manuscript' => 'required|file|mimes:doc,docx,zip,pdf|max:5000'
         ]);
 
-        $data = $request->all();
-        $names = ['opinion_format', 'manuscript'];
+        DB::beginTransaction();
 
-        foreach ($names as $name) {
-            if (!empty($data[$name])) {
-                $manuscriptNo = Upload::generateReviewedNumber($forward, $data[$name], config('appConstants.types.' . $name));
-                $data[$name] = $this->uploadFile($data[$name], $manuscriptNo);
+        try {
+
+            $data = $request->all();
+            $names = ['opinion_format', 'manuscript'];
+
+            foreach ($names as $name) {
+                if (!empty($data[$name])) {
+                    $manuscriptNo = Upload::generateReviewedNumber($forward, $data[$name], config('appConstants.types.' . $name));
+                    $data[$name] = $this->uploadFile($data[$name], $manuscriptNo);
+                }
             }
+
+            $data['status'] = config('appConstants.forwards.reviewed');
+
+            $forward->update($data);
+
+            $reviewer = User::find($forward->reviewer_id)->email;
+
+            Mail::to($reviewer)->send(new ReviewerReceiving($forward));
+            DB::commit();
+            Session::flash('success', '*** Reviewed Opinion have been Uploaded ***');
+            return redirect()->route('forwards.index.reviewed');
+        } catch (\Exception $ex) {
+            DB::rollback();
+            Session::flash('error', $ex->getMessage());
+            return redirect()->back();
         }
-
-        $data['status'] = config('appConstants.forwards.reviewed');
-
-        $forward->update($data);
-
-        return redirect()->route('forwards.index.reviewed');
     }
 
     /**

@@ -1,12 +1,5 @@
 @extends('frontend.master')
 @section('content')
-<p style="text-align:justify; white-space: pre-line;" id="ethics-data">
-
-</p>
-
-<script>
-    $(document).ready(function() {
-        getPublicationEthics();
-    });
-</script>
+<h6>PUBLICATION ETHICS</h6>
+<p style="text-align:justify; white-space: pre-line;" id="guideline-data">{{$text}}</p>
 @endsection
