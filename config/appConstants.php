@@ -43,6 +43,8 @@ return [
         'author_revisioned' => 'REVISIONED PAPERS',
         'author_processing' => 'PAPERS UNDER PROCESSING',
         'author_published' => 'PUBLISHED PAPERS',
+        'author_rejected' => 'REJECTED PAPERS',
+        'author_accepted' => 'ACCEPTED PAPERS',
 
         'reviewer_new' => 'NEW FORWARDED PAPERS',
         'reviewer_accepted' => 'ALL ACCEPTED PAPERS',

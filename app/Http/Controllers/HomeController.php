@@ -11,6 +11,7 @@ use App\Models\Paper;
 use App\Models\Forward;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
@@ -40,6 +41,8 @@ class HomeController extends Controller
             $reviewed = count(Paper::where('status', config('appConstants.status.reviewed'))->get());
             $revisioning = count(Paper::where('status', config('appConstants.status.revisioning'))->get());
             $revisioned = count(Paper::where('status', config('appConstants.status.revisioned'))->get());
+            $accepted = count(Paper::where('status', config('appConstants.status.accepted'))->get());
+            $rejected = count(Paper::where('status', config('appConstants.status.rejected'))->get());
             $processing = count(Paper::where('status', config('appConstants.status.processing'))->get());
             $published = count(Paper::where('status', config('appConstants.status.published'))->get());
             return view(
@@ -51,6 +54,8 @@ class HomeController extends Controller
                     'reviewed',
                     'revisioning',
                     'revisioned',
+                    'accepted',
+                    'rejected',
                     'processing',
                     'published'
                 )
@@ -65,16 +70,18 @@ class HomeController extends Controller
                 'dashboards.reviewer',
                 compact('all', 'new', 'accepted', 'rejected', 'reviewed')
             );
-        } elseif ($role == "Author") {
+        } else {
             $submitted = count(Paper::where('user_id', Auth::id())->get());
             $reviewing = count(Paper::where([['user_id', auth()->id()], ['status', config('appConstants.status.reviewing')]])->get());
             $reviewed = count(Paper::where([['user_id', auth()->id()], ['status', config('appConstants.status.reviewed')]])->get());
             $revisioned = count(Paper::where([['user_id', auth()->id()], ['status', config('appConstants.status.revisioned')]])->get());
             $processing = count(Paper::where([['user_id', auth()->id()], ['status', config('appConstants.status.processing')]])->get());
             $published = count(Paper::where([['user_id', auth()->id()], ['status', config('appConstants.status.published')]])->get());
+            $accepted = count(Paper::where([['user_id', auth()->id()], ['status', config('appConstants.status.accepted')]])->get());
+            $rejected = count(Paper::where([['user_id', auth()->id()], ['status', config('appConstants.status.rejected')]])->get());
             return view(
                 'dashboards.author',
-                compact('submitted', 'reviewing', 'reviewed', 'revisioned', 'processing', 'published')
+                compact('submitted', 'reviewing', 'reviewed', 'revisioned', 'processing', 'published', 'accepted', 'rejected')
             );
         }
     }
@@ -89,5 +96,41 @@ class HomeController extends Controller
         $user = User::find(Auth::id());
 
         return view('auth.profile', compact('user'));
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $this->validate($request, [
+            'first_name' => 'required|string|max:50',
+            'middle_name' => 'nullable|string|max:50',
+            'last_name' => 'required|string|max:50',
+            'affiliation' => 'nullable|string|max:150',
+            'specialization' => 'nullable|string|max:250',
+            'phone' => 'nullable|string|max:20',
+            'mobile' => 'required|string|max:20',
+        ]);
+
+        $data = $request->all();
+
+        $user->update($data);
+
+        Session::flash('success', "*** Your Profile been Updated ***");
+        return redirect()->back();
+    }
+
+    public function updatePassword(Request $request, User $user)
+    {
+        $this->validate($request, [
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $data = $request->all();
+        $user = User::find(auth()->id());
+
+        $user->password = Hash::make($data['password']);
+        $user->save();
+
+        Session::flash('success', '*** Password Updated Successfully ***');
+        return redirect()->back();
     }
 }

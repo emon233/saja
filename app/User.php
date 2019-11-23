@@ -51,4 +51,15 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Editor');
     }
+
+    /**
+     * Generate the Full Name of an User
+     *
+     * @param User $user
+     * @return string|null
+     */
+    public static function generateFullNameFromUser(User $user)
+    {
+        return $user->first_name . ' ' . $user->middle_name . ' ' . $user->last_name;
+    }
 }

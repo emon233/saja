@@ -23,6 +23,13 @@ class Paper extends Model
     ];
 
     /**
+     * Primary Key for Papers Table
+     *
+     * @var bigInteger
+     */
+    protected $primayKey = 'id';
+
+    /**
      * BelongsTo User
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
