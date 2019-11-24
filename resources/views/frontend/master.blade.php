@@ -81,7 +81,7 @@
                                     <li><a href="{{ route('index.payment_method') }}">Payment Method</a></li>
                                     <li><a href="{{ route('index.publication_ethics') }}">Publication Ethics</a></li>
                                     <li><a href="{{ route('index.contact') }}">Contact</a></li>
-                                    <li><a href="#">Archives</a></li>
+                                    <li><a href="{{ route('index.issue_archives') }}">Archives</a></li>
                                     <li><a href="{{ route('index.links') }}">Important Links</a></li>
                                     <!-- Authentication Links -->
                                     @guest

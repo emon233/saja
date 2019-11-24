@@ -12,6 +12,8 @@
                         <li>&nbsp;</li>
                         <li><a href="{{ route('instructions.index') }}">Front Page</a></li>
                         <li><a href="{{ route('links.index') }}">Upload Important Links</a></li>
+                        <li>&nbsp;</li>
+                        <li><a href="{{ route('issues.index') }}">Issues</a></li>
                     </ul>
                 </div>
             </div>

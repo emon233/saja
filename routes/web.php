@@ -21,7 +21,10 @@ Route::get('/contact', 'FrontEnd@index_contact')->name('index.contact');
 Route::get('/important-links', 'FrontEnd@index_links')->name('index.links');
 
 Route::get('/editorial-board', 'FrontEnd@index_editorial_board')->name('index.editorial_board');
-Route::get('/current-issue', 'FrontEnd@index_current_issue')->name('index.current_issue');
+
+Route::get('/issue-archives', 'IssueController@index_archives')->name('index.issue_archives');
+Route::get('/current-issue', 'ArchiveController@index_current_issue')->name('index.current_issue');
+Route::get('/archive-details/{issue}', 'ArchiveController@index_archives')->name('index.archives.details');
 
 Auth::routes();
 
@@ -134,3 +137,24 @@ Route::post('/links', 'LinkController@store')->name('links.store');
 Route::get('/links/{link}/edit', 'LinkController@edit')->name('links.edit');
 Route::put('/links/{link}/update', 'LinkController@update')->name('links.update');
 Route::delete('/links/{link}/delete', 'LinkController@destroy')->name('links.delete');
+
+/**
+ * Issues Routes
+ */
+Route::get('/issues', 'IssueController@index')->name('issues.index');
+Route::get('/issues/create', 'IssueController@create')->name('issues.create');
+Route::post('/issues', 'IssueController@store')->name('issues.store');
+Route::get('/issues/{issue}/edit', 'IssueController@edit')->name('issues.edit');
+Route::put('/issues/{issue}/update', 'IssueController@update')->name('issues.update');
+Route::put('/issues/{issue}/current', 'IssueController@makeCurrent')->name('issues.current');
+Route::delete('/issues/{issue}/delete', 'IssueController@destroy')->name('issues.delete');
+
+/**
+ * Archives Routes
+ */
+Route::get('/archives/{issue}/index', 'ArchiveController@index')->name('archives.index');
+Route::get('/archives/{issue}/create', 'ArchiveController@create')->name('archives.create');
+Route::post('/archives', 'ArchiveController@store')->name('archives.store');
+Route::get('/archives/{archive}/edit', 'ArchiveController@edit')->name('archives.edit');
+Route::put('/archives/{archive}/update', 'ArchiveController@update')->name('archives.update');
+Route::delete('/archives/{archive}/delete', 'ArchiveController@delete')->name('archives.delete');
