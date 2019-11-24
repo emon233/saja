@@ -7,9 +7,9 @@
                     <div class="logo">
                         <a href="/" style="color:#fff;"><img src="{{ asset('frontend/logo.png') }}"></a>
                     </div>
-                    <div style="padding-top:10px;">
-                        <h6 class="text-center">
-                            <span style="color: #fff;font-size: 20px;">South Asian Journal of Agriculture (SAJA)</span>
+                    <div style = "margin-top: 10px;margin-bottom: -10px;">
+                        <h6 class="text-center" style = " font-size: calc(13px + 0.35vw); ">
+                            <span style="color: #fff;font-size: calc(15px + 1.15vw);">South Asian Journal of Agriculture (SAJA)</span>
                             <br>
                             ISSN: 1991-0037
                             <br>
