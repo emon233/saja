@@ -14,13 +14,13 @@
         <th>Action</th>
     </thead>
     <tbody>
-        @foreach($issues as $key=>$issue)
+        @foreach($issues as $issue)
         <tr>
             <td>{{$issue->year}}</td>
             <td>{{$issue->volume}}</td>
             <td>{{$issue->issue_no}}</td>
             <td>
-                <a href="{{ route('archives.details', $issue->id) }}">Details</a>
+                <a href="{{ route('index.archives.details', $issue->id) }}">Details</a>
             </td>
         </tr>
         @endforeach
