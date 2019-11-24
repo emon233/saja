@@ -71,6 +71,8 @@ class HomeController extends Controller
                 compact('all', 'new', 'accepted', 'rejected', 'reviewed')
             );
         } else {
+            Session::put('role', 'Author');
+
             $submitted = count(Paper::where('user_id', Auth::id())->get());
             $reviewing = count(Paper::where([['user_id', auth()->id()], ['status', config('appConstants.status.reviewing')]])->get());
             $reviewed = count(Paper::where([['user_id', auth()->id()], ['status', config('appConstants.status.reviewed')]])->get());
