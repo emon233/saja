@@ -23,6 +23,15 @@
                         <li><a href="{{ route('papers.author.published') }}">Published Papers ({{ $published }})</a></li>
                         <li><a href="{{ route('papers.author.rejected') }}">Rejected Papers ({{ $rejected }})</a></li>
                     </ul>
+                    <br>
+                    <br>
+                    <div class="justify-content-center">
+                        <h6 style="text-align:center;">Want to be a part of SAJA's Reviewer Panel. Click Below.</h6>
+                        <form method="post" action="{{ route('reviewers.request') }}">
+                            @csrf
+                            <input type="submit" class="btn btn-primary float-right" onclick="return confirm('Are you sure?')" value="BECOME A REVIEWER">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

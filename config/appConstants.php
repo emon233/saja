@@ -50,7 +50,12 @@ return [
         'reviewer_accepted' => 'ALL ACCEPTED PAPERS',
         'reviewer_rejected' => 'ALL REJECTED PAPERS',
         'reviewer_reviewed' => 'ALL REVIEWED PAPERS',
-        'reviewer_all' => 'ALL FORWARDED PAPERS'
+        'reviewer_all' => 'ALL FORWARDED PAPERS',
+
+        'editor_users' => 'USERS',
+        'editor_reviewers' => 'REVIEWERS',
+        'editor_editors' => 'EDITORS',
+        'editor_reviewer_requests' => 'REQUESTED REVIEWERS'
     ],
 
     'types' => [

@@ -158,3 +158,21 @@ Route::post('/archives', 'ArchiveController@store')->name('archives.store');
 Route::get('/archives/{archive}/edit', 'ArchiveController@edit')->name('archives.edit');
 Route::put('/archives/{archive}/update', 'ArchiveController@update')->name('archives.update');
 Route::delete('/archives/{archive}/delete', 'ArchiveController@delete')->name('archives.delete');
+
+/**
+ * User Routes
+ */
+Route::get('/users', 'UserController@index')->name('users.index');
+Route::get('/editors', 'EditorController@index')->name('editors.index');
+Route::get('/reviewers', 'ReviewerController@index')->name('reviewers.index');
+Route::get('/reviewers/requested', 'ReviewerController@requested')->name('reviewers.requested');
+
+Route::get('/users/{user}/profile', 'UserController@profile')->name('users.editors.profile');
+
+Route::put('/users/{user}/make-reviewer', 'UserController@makeReviewer')->name('users.reviewer.make');
+Route::put('/users/{user}/remove-reviewer', 'UserController@removeReviewer')->name('users.reviewer.remove');
+Route::put('/users/{user}/make-editor', 'UserController@makeEditor')->name('users.editor.make');
+Route::put('/users/{user}/remove-editor', 'UserController@removeEditor')->name('users.editor.remove');
+
+
+Route::post('/reviewers', 'ReviewerController@request')->name('reviewers.request');

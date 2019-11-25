@@ -14,6 +14,11 @@
                         <li><a href="{{ route('links.index') }}">Upload Important Links</a></li>
                         <li>&nbsp;</li>
                         <li><a href="{{ route('issues.index') }}">Issues</a></li>
+                        <li>&nbsp;</li>
+                        <li><a href="{{ route('users.index') }}">All Users</a></li>
+                        <li><a href="{{ route('editors.index') }}">Editors</a></li>
+                        <li><a href="{{ route('reviewers.index') }}">Reviewers</a></li>
+                        <li><a href="{{ route('reviewers.requested') }}">Reviewer Requests</a></li>
                     </ul>
                 </div>
             </div>

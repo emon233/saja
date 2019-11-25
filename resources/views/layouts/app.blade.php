@@ -170,9 +170,13 @@
     <script src="{{ asset('frontend/js/plugins/plugins.js') }}"></script>
     <!-- Active js -->
     <script src="{{ asset('frontend/js/active.js') }}"></script>
+    <!-- DataTable js -->
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
     <script language="javascript" type="text/javascript">
-
+        $(document).ready(function() {
+            $('.dataTable').DataTable();
+        });
     </script>
     @yield('js')
 </body>
