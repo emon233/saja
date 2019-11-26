@@ -4,6 +4,8 @@
 <div class="row">
     <div class="col-lg-12 col-md-12 mb-4">
         <h5>ISSUES</h5>
+
+        <a href="{{ route('issues.create') }}" class="btn btn-primary float-right">CREATE NEW</a>
     </div>
 </div>
 

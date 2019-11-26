@@ -24,6 +24,7 @@
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
+                    <strong class="instruction-msg">* Required</strong>
                 </div>
             </div>
             <div class="form-group row">
@@ -50,6 +51,7 @@
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
+                    <strong class="instruction-msg">* Required</strong>
                 </div>
             </div>
             <div class="form-group row">
@@ -109,6 +111,7 @@
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
+                    <strong class="instruction-msg">* Required</strong>
                 </div>
             </div>
             <div class="form-group row">
@@ -136,6 +139,7 @@
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
+                    <strong class="instruction-msg">* Required. Minimum 8 Digits.</strong>
                 </div>
             </div>
 

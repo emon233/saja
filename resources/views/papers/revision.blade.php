@@ -53,7 +53,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg">Must be .pdf/.jpg/.jpeg file. Max File Size: 1 MB</strong>
+                            <strong class="instruction-msg">Must be .pdf/.jpg/.jpeg file. Max File Size: 5 MB</strong>
                         </div>
                     </div>
                     <div class="form-group row">

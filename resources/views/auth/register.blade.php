@@ -14,20 +14,21 @@
                             <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ $user->first_name ?? old('first_name') }}" required>
+                                <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required>
 
                                 @error('first_name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                                <strong class="instruction-msg">* Required</strong>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="middle_name" class="col-md-4 col-form-label text-md-right">{{ __('Middle Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="middle_name" type="text" class="form-control @error('middle_name') is-invalid @enderror" name="middle_name" value="{{ $user->middle_name ?? old('middle_name') }}">
+                                <input id="middle_name" type="text" class="form-control @error('middle_name') is-invalid @enderror" name="middle_name" value="{{ old('middle_name') }}">
 
                                 @error('middle_name')
                                 <span class="invalid-feedback" role="alert">
@@ -40,13 +41,14 @@
                             <label for="last_name" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ $user->last_name ?? old('last_name') }}" required>
+                                <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required>
 
                                 @error('last_name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                                <strong class="instruction-msg">* Required</strong>
                             </div>
                         </div>
 
@@ -54,13 +56,14 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required >
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                                <strong class="instruction-msg">* Required</strong>
                             </div>
                         </div>
 
@@ -68,7 +71,7 @@
                             <label for="affiliation" class="col-md-4 col-form-label text-md-right">{{ __('Affiliation') }}</label>
 
                             <div class="col-md-6">
-                                <input id="affiliation" type="text" class="form-control @error('affiliation') is-invalid @enderror" name="affiliation" value="{{ $user->affiliation ?? old('affiliation') }}">
+                                <input id="affiliation" type="text" class="form-control @error('affiliation') is-invalid @enderror" name="affiliation" value="{{ old('affiliation') }}">
 
                                 @error('affiliation')
                                 <span class="invalid-feedback" role="alert">
@@ -81,7 +84,7 @@
                             <label for="specialization" class="col-md-4 col-form-label text-md-right">{{ __('Specialization') }}</label>
 
                             <div class="col-md-6">
-                                <textarea id="specialization" name="specialization" class="form-control @error('affiliation') is-invalid @enderror">{{ $user->specialization ?? old('specialization') }}</textarea>
+                                <textarea id="specialization" name="specialization" class="form-control @error('affiliation') is-invalid @enderror">{{ old('specialization') }}</textarea>
 
                                 @error('specialization')
                                 <span class="invalid-feedback" role="alert">
@@ -94,7 +97,7 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone No') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ $user->phone ?? old('phone') }}">
+                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}">
 
                                 @error('phone')
                                 <span class="invalid-feedback" role="alert">
@@ -107,13 +110,14 @@
                             <label for="mobile" class="col-md-4 col-form-label text-md-right">{{ __('Mobile No') }}</label>
 
                             <div class="col-md-6">
-                                <input id="mobile" type="text" class="form-control @error('mobile') is-invalid @enderror" name="mobile" value="{{ $user->mobile ?? old('mobile') }}" required>
+                                <input id="mobile" type="text" class="form-control @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" required>
 
                                 @error('mobile')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                                <strong class="instruction-msg">* Required</strong>
                             </div>
                         </div>
 
@@ -128,6 +132,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                                <strong class="instruction-msg">* Required. Minimum 8 Digits.</strong>
                             </div>
                         </div>
 

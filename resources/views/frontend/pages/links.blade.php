@@ -10,7 +10,7 @@
                     <tr>
                         <td>{{ $link->title }}</td>
                         <td>
-                            <a href="{{ Storage::url($link->file) }}" target="_blank">{{ __('Download') }}</a>
+                            <a href="{{ route('files.download', $link->file) }}" target="_blank">{{ __('Download') }}</a>
                         </td>
                     </tr>
                     @endforeach

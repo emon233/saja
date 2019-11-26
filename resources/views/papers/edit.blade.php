@@ -29,7 +29,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg"></strong>
+                            <strong class="instruction-msg">Select a Discipline</strong>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -47,7 +47,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg"></strong>
+                            <strong class="instruction-msg">Select an Article Type</strong>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -61,7 +61,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg"></strong>
+                            <strong class="instruction-msg">Must be Under 250 Digits</strong>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -75,7 +75,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg"></strong>
+                            <strong class="instruction-msg">Must be Under 250 Digits</strong>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -89,7 +89,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg"></strong>
+                            <strong class="instruction-msg">Can not be more than 5 words</strong>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -103,7 +103,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg"></strong>
+                            <strong class="instruction-msg">Must be .doc/.docx file. Max File Size: 2 MB</strong>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -117,7 +117,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg"></strong>
+                            <strong class="instruction-msg">Must be .doc/.docx file. Max File Size: 2 MB</strong>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -131,7 +131,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg"></strong>
+                            <strong class="instruction-msg">Must be .doc/.docx file. Max File Size: 2 MB</strong>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -145,7 +145,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg"></strong>
+                            <strong class="instruction-msg">Must be .doc/.docx file. Max File Size: 5 MB</strong>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -159,7 +159,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg"></strong>
+                            <strong class="instruction-msg">Must be .pdf/.jpg/.jpeg file. Max File Size: 2 MB</strong>
                         </div>
                     </div>
                 </div>

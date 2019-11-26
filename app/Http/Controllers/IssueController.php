@@ -145,9 +145,9 @@ class IssueController extends Controller
     protected function validation(Request $request)
     {
         return $request->validate([
-            'year' => 'required|string|max:10',
-            'volume' => 'required|string|max:10',
-            'issue_no' => 'required|string|max:2',
+            'year' => 'required|string|max:20',
+            'volume' => 'required|string|max:20',
+            'issue_no' => 'required|string|max:20',
         ]);
     }
 }
