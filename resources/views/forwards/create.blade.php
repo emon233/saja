@@ -12,7 +12,7 @@
         <div class="card">
             <div class="card-body">
                 <div>
-                    <form method="post" action="{{ route('forwards.store') }}">
+                    <form id="form_forward_paper" method="post" action="{{ route('forwards.store') }}">
                         @csrf
                         <input type="hidden" name="paper" value="{{ $paper->id }}">
                         <div class="form-group row">
@@ -127,6 +127,7 @@
         </div>
     </div>
 </div>
+
 
 
 @endsection

@@ -41,6 +41,7 @@ class AuthorReviewed extends Mailable
         $author = User::generateFullNameFromUser($this->paper->user);
 
         return $this->markdown('mails.authors.reviewed')
+            ->subject('SAJA - PAPER REVIEWED')
             ->with([
                 'author' => $author,
                 'title' => $this->paper->title,

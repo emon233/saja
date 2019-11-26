@@ -40,6 +40,7 @@ class ReviewerAccepted extends Mailable
         $reviewer = User::generateFullNameFromUser($this->user);
 
         return $this->markdown('mails.reviewers.accepted')
+            ->subject('SAJA - REVIEWER ACCEPTANCE NOTICE')
             ->with([
                 'reviewer' => $reviewer,
             ]);

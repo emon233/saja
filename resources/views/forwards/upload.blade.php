@@ -20,7 +20,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg"></strong>
+                            <strong class="instruction-msg">Must be .doc/.docx file. Max File Size: 10 MB</strong>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -34,7 +34,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg"></strong>
+                            <strong class="instruction-msg">Must be .doc/.docx file. Max File Size: 10 MB</strong>
                         </div>
                     </div>
                     <input type="submit" class="btn btn-primary float-right" onclick="return confirm('Are you sure?')" value="UPLOAD">

@@ -41,6 +41,7 @@ class AuthorCheckedGalley extends Mailable
         $author = User::generateFullNameFromUser($this->paper->user);
 
         return $this->markdown('mails.authors.checked-galley')
+            ->subject('SAJA - CHECKED GALLEY PROOF SUBMISSION')
             ->with([
                 'author' => $author,
                 'title' => $this->paper->title,

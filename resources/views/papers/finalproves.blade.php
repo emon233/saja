@@ -25,7 +25,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg"></strong>
+                            <strong class="instruction-msg">Must be .pdf file. Max File Size: 10 MB</strong>
                         </div>
                     </div>
                     <input type="submit" class="btn btn-primary float-right" value="SUBMIT">

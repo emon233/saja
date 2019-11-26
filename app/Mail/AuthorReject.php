@@ -41,6 +41,7 @@ class AuthorReject extends Mailable
         $author = User::generateFullNameFromUser($this->paper->user);
 
         return $this->markdown('mails.authors.reject')
+            ->subject('SAJA - PAPER REJECTED')
             ->with([
                 'author' => $author,
                 'title' => $this->paper->title,

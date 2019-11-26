@@ -44,7 +44,7 @@
                         <a href="{{ Storage::url($forward->paper->manuscript) }}" target="_blank">{{ __('Download') }}</a>
                     </label>
                 </label>
-                @if($forward->status != config('appConstants.forwards.accepted'))
+                @if($forward->status == config('appConstants.forwards.forwarded'))
                 <hr>
                 <div class="row justify-content-center">
                     <div class="col-lg-3 col-md-3 mb-4">

@@ -100,7 +100,7 @@
                                             {{ Session::get('role') }} Dashboard
                                         </a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="{{ route('users.profile') }}">
                                             <i class="fa fa-user"></i>
                                             {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} (Profile)
                                         </a>

@@ -41,6 +41,7 @@ class AuthorAccept extends Mailable
         $author = User::generateFullNameFromUser($this->paper->user);
 
         return $this->markdown('mails.authors.accept')
+            ->subject('SAJA - PAPER ACCEPTED')
             ->with([
                 'author' => $author,
                 'title' => $this->paper->title,

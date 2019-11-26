@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\User;
+use App\Upload;
 use App\Models\Paper;
 
 use Illuminate\Bus\Queueable;
@@ -17,7 +18,7 @@ class AuthorNew extends Mailable
     /**
      * Protected Variable
      *
-     * @var [Paper] $paper
+     * @var Paper $paper
      */
     protected $paper;
 
@@ -39,12 +40,14 @@ class AuthorNew extends Mailable
     public function build()
     {
         $author = User::generateFullNameFromUser($this->paper->user);
+        $id = Upload::mainPaperManuscript($this->paper);
 
         return $this->markdown('mails.authors.new')
+            ->subject('SAJA - NEW SUBMISSION')
             ->with([
                 'author' => $author,
                 'title' => $this->paper->title,
-                'ID' => $this->paper->manuscript,
+                'ID' => $id,
             ]);
     }
 }

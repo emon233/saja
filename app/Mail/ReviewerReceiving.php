@@ -42,6 +42,7 @@ class ReviewerReceiving extends Mailable
         $reviewer = User::generateFullNameFromUser($reviewer);
 
         return $this->markdown('mails.reviewers.receiving')
+            ->subject('SAJA - REVIEW RECEIVED')
             ->with([
                 'reviewer' => $reviewer,
                 'title' => $this->forward->paper->title,

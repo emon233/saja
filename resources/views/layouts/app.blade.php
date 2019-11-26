@@ -172,10 +172,15 @@
     <script src="{{ asset('frontend/js/active.js') }}"></script>
     <!-- DataTable js -->
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <!-- Select2 js -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 
     <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             $('.dataTable').DataTable();
+            $('#reviewer').select2();
+            var today = new Date().toISOString().split('T')[0];
+            $("#to_date").val(today);
         });
     </script>
     @yield('js')

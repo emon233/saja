@@ -176,3 +176,5 @@ Route::put('/users/{user}/remove-editor', 'UserController@removeEditor')->name('
 
 
 Route::post('/reviewers', 'ReviewerController@request')->name('reviewers.request');
+
+Route::get('/download/{fileName}', 'HomeController@download')->name('files.download');

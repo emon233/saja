@@ -100,9 +100,6 @@ class Upload
     {
         $paper = Paper::find($forward->paper_id);
         return self::mainPaperManuscript($paper);
-        // $fileName = str_replace('_Manuscript', '', $paper->manuscript);
-        // return self::cutExtension($fileName);
-        //return preg_replace('/\\.[^.\\s]{3,4}$/', '', $fileName);
     }
 
     /**
@@ -111,7 +108,7 @@ class Upload
      * @param Paper $paper
      * @return string|null
      */
-    protected static function mainPaperManuscript(Paper $paper)
+    public static function mainPaperManuscript(Paper $paper)
     {
         $fileName = str_replace('_Manuscript', '', $paper->manuscript);
         return self::cutExtension($fileName);

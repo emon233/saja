@@ -12,7 +12,7 @@
         <div class="form-group row">
             <label for="opinion_format" class="col-md-6 col-form-label text-md-right">{{ __('Opinion Format ').($key+1) }}</label>
             <label for="opinion_format" class="col-md-6 col-form-label text-md-left">
-                <a href="{{ Storage::url($forward->opinion_format) }}" target="_blank">{{ __('Download') }}</a>
+                <a href="{{ route('files.download',$forward->opinion_format) }}" target="_blank">{{ __('Download') }}</a>
             </label>
         </div>
     </div>
@@ -20,7 +20,7 @@
         <div class="form-group row">
             <label for="manuscript" class="col-md-6 col-form-label text-md-right">{{ __('Reviewed Manuscript ').($key+1) }}</label>
             <label for="manuscript" class="col-md-6 col-form-label text-md-left">
-                <a href="{{ Storage::url($forward->manuscript) }}" target="_blank">{{ __('Download') }}</a>
+                <a href="{{ route('files.download',$forward->manuscript) }}" target="_blank">{{ __('Download') }}</a>
             </label>
         </div>
     </div>

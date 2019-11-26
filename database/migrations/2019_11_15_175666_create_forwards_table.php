@@ -17,7 +17,7 @@ class CreateForwardsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('paper_id');
             $table->unsignedBigInteger('reviewer_id');
-            $table->date('from_date')->useCurrent();
+            //$table->date('from_date')->useCurrent();
             $table->date('to_date');
             $table->string('status');
             $table->string('opinion_format')->nullable();

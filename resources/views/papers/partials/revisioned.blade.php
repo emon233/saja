@@ -12,7 +12,7 @@
 
             @if(!empty($paper->edited_manuscript))
             <label for="edited_manuscript" class="col-md-6 col-form-label text-md-left">
-                <a href="{{ Storage::url($paper->edited_manuscript) }}" target="_blank">{{ __('Download') }}</a>
+                <a href="{{ route('files.download',$paper->edited_manuscript) }}" target="_blank">{{ __('Download') }}</a>
             </label>
             @endif
         </div>
@@ -21,7 +21,7 @@
             <label for="declaration_letter" class="col-md-6 col-form-label text-md-right">{{ __('Declaration Letter') }}</label>
             @if(!empty($paper->declaration_letter))
             <label for="declaration_letter" class="col-md-6 col-form-label text-md-left">
-                <a href="{{ Storage::url($paper->declaration_letter) }}" target="_blank">{{ __('Download') }}</a>
+                <a href="{{ route('files.download',$paper->declaration_letter) }}" target="_blank">{{ __('Download') }}</a>
             </label>
             @endif
         </div>
@@ -32,7 +32,7 @@
 
             @if(!empty($paper->correction))
             <label for="correction" class="col-md-6 col-form-label text-md-left">
-                <a href="{{ Storage::url($paper->correction) }}" target="_blank">{{ __('Download') }}</a>
+                <a href="{{ route('files.download',$paper->correction) }}" target="_blank">{{ __('Download') }}</a>
             </label>
             @endif
         </div>
@@ -41,7 +41,7 @@
             <label for="payment_slip" class="col-md-6 col-form-label text-md-right">{{ __('Payment Slip') }}</label>
             @if(!empty($paper->payment_slip))
             <label for="payment_slip" class="col-md-6 col-form-label text-md-left">
-                <a href="{{ Storage::url($paper->payment_slip) }}" target="_blank">{{ __('Download') }}</a>
+                <a href="{{ route('files.download',$paper->payment_slip) }}" target="_blank">{{ __('Download') }}</a>
             </label>
             @endif
         </div>

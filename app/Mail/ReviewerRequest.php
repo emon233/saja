@@ -40,6 +40,7 @@ class ReviewerRequest extends Mailable
         $reviewer = User::generateFullNameFromUser($this->user);
 
         return $this->markdown('mails.reviewers.requested')
+            ->subject('SAJA - REVIEWER REQUEST RECEIVED')
             ->with([
                 'reviewer' => $reviewer,
             ]);

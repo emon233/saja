@@ -13,3 +13,7 @@ a.delete {
 a.upload {
     color: peru;
 }
+
+.instruction-msg {
+    color: red;
+}

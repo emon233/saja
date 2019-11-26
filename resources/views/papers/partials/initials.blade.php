@@ -8,7 +8,7 @@
             <label for="manuscript" class="col-md-6 col-form-label text-md-right">{{ __('Manuscript') }}</label>
 
             <label for="manuscript" class="col-md-6 col-form-label text-md-left">
-                <a href="{{ Storage::url($paper->manuscript) }}" target="_blank">{{ __('Download') }}</a>
+                <a href="{{ route('files.download',$paper->manuscript) }}" target="_blank">{{ __('Download') }}</a>
             </label>
         </div>
 
@@ -16,7 +16,7 @@
             <label for="cover_letter" class="col-md-6 col-form-label text-md-right">{{ __('Cover Letter') }}</label>
 
             <label for="cover_letter" class="col-md-6 col-form-label text-md-left">
-                <a href="{{ Storage::url($paper->cover_letter) }}" target="_blank">{{ __('Download') }}</a>
+                <a href="{{ route('files.download',$paper->cover_letter) }}" target="_blank">{{ __('Download') }}</a>
             </label>
         </div>
 
@@ -24,7 +24,7 @@
             <label for="processing_fee" class="col-md-6 col-form-label text-md-right">{{ __('Payment Slip 1') }}</label>
 
             <label for="processing_fee" class="col-md-6 col-form-label text-md-left">
-                <a href="{{ Storage::url($paper->processing_fee) }}" target="_blank">{{ __('Download') }}</a>
+                <a href="{{ route('files.download',$paper->processing_fee) }}" target="_blank">{{ __('Download') }}</a>
             </label>
         </div>
     </div>
@@ -33,7 +33,7 @@
             <label for="title_page" class="col-md-6 col-form-label text-md-right">{{ __('Title Page') }}</label>
 
             <label for="title_page" class="col-md-6 col-form-label text-md-left">
-                <a href="{{ Storage::url($paper->title_page) }}" target="_blank">{{ __('Download') }}</a>
+                <a href="{{ route('files.download',$paper->title_page) }}" target="_blank">{{ __('Download') }}</a>
             </label>
         </div>
 
@@ -41,7 +41,7 @@
             <label for="check_list" class="col-md-6 col-form-label text-md-right">{{ __('Check List') }}</label>
 
             <label for="check_list" class="col-md-6 col-form-label text-md-left">
-                <a href="{{ Storage::url($paper->check_list) }}" target="_blank">{{ __('Download') }}</a>
+                <a href="{{ route('files.download',$paper->check_list) }}" target="_blank">{{ __('Download') }}</a>
             </label>
         </div>
     </div>

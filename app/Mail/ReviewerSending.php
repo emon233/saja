@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\User;
+use App\Upload;
 use App\Models\Forward;
 
 use Illuminate\Bus\Queueable;
@@ -40,12 +41,14 @@ class ReviewerSending extends Mailable
     {
         $reviewer = User::find($this->forward->reviewer_id);
         $reviewer = User::generateFullNameFromUser($reviewer);
+        $id = Upload::mainPaperManuscript($this->forward->paper);
 
         return $this->markdown('mails.reviewers.sending')
+            ->subject('SAJA - PAPER FORWARDED')
             ->with([
                 'reviewer' => $reviewer,
                 'title' => $this->forward->paper->title,
-                'ID' => $this->forward->paper->manuscript,
+                'ID' => $id,
             ]);
     }
 }

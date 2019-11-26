@@ -100,6 +100,13 @@ class HomeController extends Controller
         return view('auth.profile', compact('user'));
     }
 
+    /**
+     * Update User's Profile
+     *
+     * @param Request $request
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, User $user)
     {
         $this->validate($request, [
@@ -120,6 +127,13 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Update Password Method
+     *
+     * @param Request $request
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updatePassword(Request $request, User $user)
     {
         $this->validate($request, [
@@ -134,5 +148,16 @@ class HomeController extends Controller
 
         Session::flash('success', '*** Password Updated Successfully ***');
         return redirect()->back();
+    }
+
+    /**
+     * Download Files from Storage
+     *
+     * @param [type] $file
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function download($fileName)
+    {
+        return response()->download(storage_path("app/public/{$fileName}"));
     }
 }

@@ -41,6 +41,7 @@ class AuthorGalley extends Mailable
         $author = User::generateFullNameFromUser($this->paper->user);
 
         return $this->markdown('mails.authors.galley')
+            ->subject('SAJA - GALLEY PROOF UPLOAD')
             ->with([
                 'author' => $author,
                 'title' => $this->paper->title,

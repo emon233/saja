@@ -25,7 +25,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg"></strong>
+                            <strong class="instruction-msg">Must be .doc/.docx file. Max File Size: 2 MB</strong>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -39,7 +39,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg"></strong>
+                            <strong class="instruction-msg">Must be .doc/.docx file. Max File Size: 2 MB</strong>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -53,7 +53,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg"></strong>
+                            <strong class="instruction-msg">Must be .pdf/.jpg/.jpeg file. Max File Size: 1 MB</strong>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -67,7 +67,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                            <strong class="instruction-msg"></strong>
+                            <strong class="instruction-msg">Must be .doc/.docx file. Max File Size: 5 MB</strong>
                         </div>
                     </div>
                     <input type="submit" class="btn btn-primary float-right" value="SUBMIT">
