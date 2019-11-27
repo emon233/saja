@@ -16,7 +16,7 @@ class ArchiveController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('editor');
+        $this->middleware('editor')->except('index_archives', 'index_current_issue');
     }
 
     /**

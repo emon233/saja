@@ -22,7 +22,7 @@
             <td>{{ $details->authors }}</td>
             <td>{{ $details->pages }}</td>
             <td>
-                <a href="{{ Storage::url($details->file) }}" target="_blank">Download</a>
+                <a href="{{ route('files.download', $details->file) }}" target="_blank">Download</a>
             </td>
         </tr>
         @endforeach
