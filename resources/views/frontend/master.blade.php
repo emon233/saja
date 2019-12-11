@@ -132,7 +132,7 @@
 
     <div class="container">
         <div class="row align-items-center hidden justify-content-center">
-            <img src="{{ asset('frontend/img/1.jpg') }}" class="img-responsive" style="width: 50%; height:15%;">
+            <img src="{{ asset('frontend/img/1.jpg') }}" class="img-responsive" style="width: 100%; height:45%;">
         </div>
     </div>
 
