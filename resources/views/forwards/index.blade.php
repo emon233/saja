@@ -24,7 +24,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $forward->paper->title }}</td>
                         <td>
-                            <a href="{{ Storage::url($forward->paper->manuscript) }}" target="_blank">{{ __('Download') }}</a>
+                            <a href="{{ route('files.download', $forward->paper->manuscript) }}" target="_blank">{{ __('Download') }}</a>
                         </td>
                         <td>{{ $forward->status }}</td>
                         <td>

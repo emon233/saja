@@ -41,7 +41,7 @@
                     <label for="manuscript" class="col-md-4 col-form-label text-md-right">{{ __('Manuscript') }}</label>
 
                     <label for="manuscript" class="col-md-4 col-form-label text-md-left">
-                        <a href="{{ Storage::url($forward->paper->manuscript) }}" target="_blank">{{ __('Download') }}</a>
+                        <a href="{{ route('files.download', $forward->paper->manuscript) }}" target="_blank">{{ __('Download') }}</a>
                     </label>
                 </label>
                 @if($forward->status == config('appConstants.forwards.forwarded'))
