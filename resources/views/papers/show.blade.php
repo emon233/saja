@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
+@include('papers.partials.comments')
 <div class="row">
     <div class="col-lg-6 col-md-6 mb-4">
         <h4>PAPER INFO</h4>
@@ -60,11 +61,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 mb-4">
-                        <form method="post" action="{{ route('papers.reviewed', $paper->id) }}">
-                            @csrf
-                            @method('PUT')
-                            <input type="submit" class="btn btn-warning float-right" onclick="return confirm('Are you sure?')" value="MARK AS REVIEWED">
-                        </form>
+                        <button class="btn btn-warning" data-toggle="modal" data-target="#comments-modal">MARK AS REVIEWED</button>
                     </div>
                 </div>
                 @endif

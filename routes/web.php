@@ -103,7 +103,7 @@ Route::put('/papers/{paper}/finalproof', 'PaperController@uploadFinalProof')->na
 Route::put('/papers/{paper}/accept', 'PaperController@accept')->name('papers.accept');
 Route::put('/papers/{paper}/reject', 'PaperController@reject')->name('papers.reject');
 Route::delete('/papers/{paper}/delete', 'PaperController@destroy')->name('papers.destroy');
-
+Route::delete('/papers/{paper}/remove', 'PaperController@remove')->name('papers.remove');
 /**
  * Forward Papers
  */

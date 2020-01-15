@@ -12,6 +12,7 @@ use App\Upload;
 
 use App\Models\Type;
 use App\Models\Paper;
+use App\Models\Forward;
 use App\Models\Discipline;
 
 use App\Mail\AuthorNew;
@@ -465,11 +466,12 @@ class PaperController extends Controller
      * @param Paper $paper
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function makeReviewed(Paper $paper)
+    public function makeReviewed(Request $request, Paper $paper)
     {
         DB::beginTransaction();
 
         try {
+            $paper->comments = $request->input('comments');
             $paper->status = config('appConstants.status.reviewed');
             $paper->save();
 
@@ -697,6 +699,7 @@ class PaperController extends Controller
      */
     public function remove(Paper $paper)
     {
+        $this->fileList($paper);
         $paper->delete();
 
         return redirect()->route('papers.index');
@@ -729,6 +732,35 @@ class PaperController extends Controller
         if (is_file($file)) {
             Storage::delete($file);
             unlink(storage_path('app/public/' . $file));
+        }
+    }
+
+    /**
+     * Find All Files of a Paper and Delete Them
+     *
+     * @param Paper $paper
+     * @return void
+     */
+    protected function fileList(Paper $paper)
+    {
+        $forwards = Forward::where('paper_id', $paper->id)->get();
+
+        foreach ($forwards as $forward) {
+            if (!empty($forward->manuscript)) {
+                $this->deleteFile($forward->manuscript);
+            }
+
+            if (!empty($forward->opinion_format)) {
+                $this->deleteFile($forward->opinion_format);
+            }
+        }
+
+        $filesArray = ['manuscript', 'title_page', 'cover_letter', 'check_list', 'processing_fee', 'declaration_letter', 'correction', 'payment_slip', 'edited_manuscript', 'galley_proof'];
+
+        foreach ($filesArray as $file) {
+            if (!empty($paper->$file)) {
+                $this->deleteFile($paper->$file);
+            }
         }
     }
 

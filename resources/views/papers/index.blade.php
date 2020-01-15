@@ -42,6 +42,15 @@
                             @if($paper->status == config('appConstants.status.reviewed') && $paper->user_id == auth()->id())
                             <a href="{{ route('papers.author.revision', $paper->id) }}" class="upload"><i class="fa fa-upload"></i></a>
                             @endif
+                            @if(Session::get('role') == config('appConstants.roles.editor'))
+                            <form method="post" action="{{ route('papers.remove', $paper) }}">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </form>
+                            @endif
                         </td>
                     </tr>
                     @endforeach
