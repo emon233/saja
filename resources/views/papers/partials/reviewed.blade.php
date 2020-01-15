@@ -7,7 +7,8 @@
 </div>
 @foreach($paper->forwards as $key=>$forward)
 @if($forward->opinion_format != "")
-<div class="row justify-content-center">
+<div class="row">
+    @if(Session::get('role') == config('appConstants.roles.editor'))
     <div class="col-lg-6 col-md-6 mb-4">
         <div class="form-group row">
             <label for="opinion_format" class="col-md-6 col-form-label text-md-right">{{ __('Opinion Format ').($key+1) }}</label>
@@ -16,6 +17,7 @@
             </label>
         </div>
     </div>
+    @endif
     <div class="col-lg-6 col-md-6 mb-4">
         <div class="form-group row">
             <label for="manuscript" class="col-md-6 col-form-label text-md-right">{{ __('Reviewed Manuscript ').($key+1) }}</label>
