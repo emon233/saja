@@ -4,7 +4,7 @@
 <link rel="icon" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
 @endsection
 @section('content')
-<h4>{{$issue->year}},{{$issue->volume}},{{$issue->issue_no}}</h4>
+<h6>Year: {{$issue->year}}| Vol: {{$issue->volume}}| Issue: {{$issue->issue_no}}</h6>
 <br>
 <table class="table table-striped table-bordered" style="width:100%">
     <thead>
@@ -12,14 +12,18 @@
         <th>Title</th>
         <th>Authors</th>
         <th>Pages</th>
+        <th>Download</th>
     </thead>
     <tbody>
-        @foreach($issue->issueDetails as $key=>$details)
+        @foreach($issue->archives as $details)
         <tr>
-            <td>{{$key+1}}</td>
-            <td><a href="/files/publish/{{$details->file}}" target="_blank">{{$details->title}}</td>
-            <td>{{$details->authors}}</td>
-            <td>{{$details->pages}}</td>
+            <td>{{ $loop->iteration }}</td>
+            <td>{!! $details->title !!}</td>
+            <td>{{ $details->authors }}</td>
+            <td>{{ $details->pages }}</td>
+            <td>
+                <a href="{{ route('files.download', $details->file) }}" target="_blank">Download</a>
+            </td>
         </tr>
         @endforeach
     </tbody>

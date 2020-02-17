@@ -1,0 +1,19 @@
+a.info {
+    color: navy;
+}
+
+a.edit {
+    color: green;
+}
+
+a.delete {
+    color: red;
+}
+
+a.upload {
+    color: peru;
+}
+
+.instruction-msg {
+    color: red;
+}

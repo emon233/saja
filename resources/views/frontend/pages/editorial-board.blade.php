@@ -1,52 +1,39 @@
 @extends('frontend.master')
 @section('content')
-    
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-6 mb-4">
-                <h5>Advisors</h5>
-                <ol id="list-advisors"></ol>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-lg-12 col-md-6 mb-4">
-                <h5>Chief Editor</h5>
-                <ol id="list-chief-editor"></ol>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-lg-12 col-md-6 mb-4">
-                <h5>Executive Editor</h5>
-                <ol id="list-exe-editor"></ol>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-lg-12 col-md-6 mb-4">
-                <h5>Additional Executive Editor</h5>
-                <ol id="list-add-exe-editor"></ol>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-lg-12 col-md-6 mb-4">
-                <h5>Editors</h5>
-                <ol id="list-editors"></ol>
-            </div>
-        </div>
-        <hr>
+
+<div class="row">
+    <div class="col-lg-12 col-md-6 mb-4">
+        <h6>Advisors</h6>
+        <p style="text-align:justify; white-space: pre-line;">{{ $editors['advisors'] }}</p>
     </div>
-    
-    <script>
-        $(document).ready(function(){
-            getAdvisors();
-            getChiefEditor();
-            getExecutiveEditor();
-            getAdditionalExecutiveEditor();
-            getEditors();
-        });
-    </script>
-    
+</div>
+<hr>
+<div class="row">
+    <div class="col-lg-12 col-md-6 mb-4">
+        <h6>Chief Editor</h6>
+        <p style="text-align:justify; white-space: pre-line;">{{ $editors['chief'] }}</p>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-lg-12 col-md-6 mb-4">
+        <h6>Executive Editor</h6>
+        <p style="text-align:justify; white-space: pre-line;">{{ $editors['executive'] }}</p>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-lg-12 col-md-6 mb-4">
+        <h6>Associate Executive Editor</h6>
+        <p style="text-align:justify; white-space: pre-line;">{{ $editors['associate'] }}</p>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-lg-12 col-md-6 mb-4">
+        <h6>Editors</h6>
+        <p style="text-align:justify; white-space: pre-line;">{{ $editors['editors'] }}</p>
+    </div>
+</div>
+
 @endsection
