@@ -2,7 +2,7 @@
 @section('content')
 <h6>IMPORTANT LINKS</h6>
 <div class="row">
-    <div class="col-lg-8 col-md-8 mb-4 float-left">
+    <div class="col-lg-12 col-md-12 mb-4 float-left">
         <div class="table table-responsive">
             <table class="table table-bordered table-condensed float-left">
                 <tbody>
