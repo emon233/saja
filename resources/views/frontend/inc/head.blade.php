@@ -6,7 +6,7 @@
 	<title>South Asian Journal of Agriculture (SAJA)</title>
 
 	<!-- Favicon -->
-	<link rel="icon" href="{{ asset('frontend/logo.png') }}">
+	<link rel="icon" href="{{ asset('frontend/img/logo.png') }}">
 
 	<!-- Core Stylesheet -->
 	<link rel="stylesheet" href="{{ asset('frontend/style.css') }}">
