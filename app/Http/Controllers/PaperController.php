@@ -686,7 +686,7 @@ class PaperController extends Controller
     {
         if ($paper->user_id == Auth::id()) {
             $paper->delete();
-            return redirect()->route('papers.submitted');
+            return redirect()->route('papers.author.submitted');
         }
         return redirect()->back();
     }

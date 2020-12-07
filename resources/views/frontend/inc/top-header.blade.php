@@ -5,7 +5,7 @@
                 <div class="top-header-content d-flex align-items-center justify-content-between">
                     <!-- Logo -->
                     <div class="logo">
-                        <a href="/" style="color:#fff;"><img src="{{ asset('frontend/logo.png') }}"></a>
+                        <a href="/" style="color:#fff;"><img src="{{ asset('frontend/img/logo.jpg') }}"></a>
                     </div>
                     <div style = "margin-top: 10px;margin-bottom: -10px;">
                         <h6 class="text-center" style = " font-size: calc(13px + 0.35vw); ">

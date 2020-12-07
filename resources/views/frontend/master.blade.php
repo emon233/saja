@@ -55,7 +55,7 @@
 
                         <!-- Logo -->
                         <div class="logo">
-                            <a href="{{ url('/') }}"><img src="{{ asset('frontend/logo.png') }}" alt="" style="height:70px; width:70px;"></a>
+                            <a href="{{ url('/') }}"><img src="{{ asset('frontend/img/logo.jpg') }}" alt="" style="height:70px; width:70px;"></a>
                         </div>
 
                         <!-- Navbar Toggler -->
@@ -132,7 +132,7 @@
 
     <div class="container">
         <div class="row align-items-center hidden justify-content-center">
-            <img src="{{ asset('frontend/img/1.jpg') }}" class="img-responsive" style="width: 100%; height:45%;">
+            <img src="{{ asset('frontend/img/cover.jpg') }}" class="img-responsive" style="width: 100%; height:45%;">
         </div>
     </div>
 
