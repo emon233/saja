@@ -1,0 +1,21 @@
+[17-Dec-2020 11:53:04 Asia/Dhaka] PHP Fatal error:  Uncaught ErrorException: file_put_contents(F:\newXampp\htdocs\personal\SAJA\web\storage\framework\views/ea90d74f8928f3dec8c6d6d461da64f240fd3beb.php): failed to open stream: No such file or directory in /home/sajaxyz/public_html/saja/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:122
+Stack trace:
+#0 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'file_put_conten...', '/home/sajaxyz/p...', 122, Array)
+#1 /home/sajaxyz/public_html/saja/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(122): file_put_contents('F:\\newXampp\\htd...', '<?php $__env->s...', 0)
+#2 /home/sajaxyz/public_html/saja/vendor/laravel/framework/src/Illuminate/View/Compilers/BladeCompiler.php(140): Illuminate\Filesystem\Filesystem->put('F:\\newXampp\\htd...', '<?php $__env->s...')
+#3 /home/sajaxyz/public_html/saja/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(51): Illuminate\View\Compilers\BladeCompiler->compile('/home/sajaxyz/p...')
+#4 /home/s in /home/sajaxyz/public_html/saja/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php on line 122
+[17-Dec-2020 11:53:13 Asia/Dhaka] PHP Fatal error:  Uncaught ErrorException: file_put_contents(F:\newXampp\htdocs\personal\SAJA\web\storage\framework\views/ea90d74f8928f3dec8c6d6d461da64f240fd3beb.php): failed to open stream: No such file or directory in /home/sajaxyz/public_html/saja/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:122
+Stack trace:
+#0 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'file_put_conten...', '/home/sajaxyz/p...', 122, Array)
+#1 /home/sajaxyz/public_html/saja/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(122): file_put_contents('F:\\newXampp\\htd...', '<?php $__env->s...', 0)
+#2 /home/sajaxyz/public_html/saja/vendor/laravel/framework/src/Illuminate/View/Compilers/BladeCompiler.php(140): Illuminate\Filesystem\Filesystem->put('F:\\newXampp\\htd...', '<?php $__env->s...')
+#3 /home/sajaxyz/public_html/saja/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(51): Illuminate\View\Compilers\BladeCompiler->compile('/home/sajaxyz/p...')
+#4 /home/s in /home/sajaxyz/public_html/saja/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php on line 122
+[17-Dec-2020 11:53:47 Asia/Dhaka] PHP Fatal error:  Uncaught ErrorException: file_put_contents(F:\newXampp\htdocs\personal\SAJA\web\storage\framework\views/ea90d74f8928f3dec8c6d6d461da64f240fd3beb.php): failed to open stream: No such file or directory in /home/sajaxyz/public_html/saja/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:122
+Stack trace:
+#0 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'file_put_conten...', '/home/sajaxyz/p...', 122, Array)
+#1 /home/sajaxyz/public_html/saja/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(122): file_put_contents('F:\\newXampp\\htd...', '<?php $__env->s...', 0)
+#2 /home/sajaxyz/public_html/saja/vendor/laravel/framework/src/Illuminate/View/Compilers/BladeCompiler.php(140): Illuminate\Filesystem\Filesystem->put('F:\\newXampp\\htd...', '<?php $__env->s...')
+#3 /home/sajaxyz/public_html/saja/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(51): Illuminate\View\Compilers\BladeCompiler->compile('/home/sajaxyz/p...')
+#4 /home/s in /home/sajaxyz/public_html/saja/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php on line 122
