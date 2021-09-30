@@ -537,7 +537,8 @@ class PaperController extends Controller
 
             Session::flash('success', '*** Revision Uploaded Successfully ***');
             return redirect()->route('papers.author.revisioned');
-        } catch (\Exception $ex) { }
+        } catch (\Exception $ex) {
+        }
     }
 
     /**
