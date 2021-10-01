@@ -162,7 +162,10 @@ class ArchiveController extends Controller
             'title' => 'required|string|max:255',
             'authors' => 'required|string|max:255',
             'pages' => 'required|string|max:10',
-            'file' => 'nullable|file|mimes:pdf|max:10000'
+            'file' => 'nullable|file|mimes:pdf|max:10000',
+            'abstract' => 'nullable|string',
+            'keywords' => 'nullable|string',
+            'how_to_cite' => 'nullable|string'
         ]);
     }
 }

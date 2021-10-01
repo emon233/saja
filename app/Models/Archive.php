@@ -12,7 +12,7 @@ class Archive extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'authors', 'pages', 'file'
+        'title', 'authors', 'pages', 'file', 'abstract', 'keywords', 'how_to_cite'
     ];
 
     /**

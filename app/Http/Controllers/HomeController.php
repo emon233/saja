@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Archive;
 use Auth;
 use Session;
 
@@ -22,7 +23,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('download');
+        $this->middleware('auth')->except(['download', 'file_details']);
     }
 
     /**
@@ -159,5 +160,14 @@ class HomeController extends Controller
     public function download($fileName)
     {
         return response()->download(storage_path("app/public/{$fileName}"));
+    }
+
+    public function file_details($id)
+    {
+        $id = base64_decode($id);
+
+        $archive = Archive::where('id', $id)->first();
+
+        return view('frontend.pages.archives-paper-details', compact('archive'));
     }
 }

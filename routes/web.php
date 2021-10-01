@@ -128,7 +128,7 @@ Route::put('/forwards/{forward}/upload', 'ForwardController@upload')->name('forw
 Route::get('/instructions', 'InstructionsController@index')->name('instructions.index');
 Route::put('/instructions/{instructions}/update', 'InstructionsController@update')->name('instructions.update');
 
-/** 
+/**
  * LinkController Routes
  */
 Route::get('/links', 'LinkController@index')->name('links.index');
@@ -177,4 +177,5 @@ Route::put('/users/{user}/remove-editor', 'UserController@removeEditor')->name('
 
 Route::post('/reviewers', 'ReviewerController@request')->name('reviewers.request');
 
+Route::get('/file-details/{id}', 'HomeController@file_details')->name('files.details');
 Route::get('/download/{fileName}', 'HomeController@download')->name('files.download');

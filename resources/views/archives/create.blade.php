@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+@section('css')
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+@append
+
 @section('content')
 
 <div class="row">
@@ -11,13 +16,13 @@
     <div class="col-lg-8 col-md-8 mb-4">
         <div class="card">
             <div class="card-body">
-                <form method="post" action="{{ route('archives.store') }}" enctype="multipart/form-data">
+                <form id="form-archive-create" method="post" action="{{ route('archives.store') }}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="issue_id" value="{{ $issue->id }}">
                     <div class="form-group row">
-                        <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
+                        <label for="title" class="col-md-3 col-form-label text-md-right">{{ __('Title') }}</label>
 
-                        <div class="col-md-6">
+                        <div class="col-md-9">
                             <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autofocus>
 
                             @error('title')
@@ -28,9 +33,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="authors" class="col-md-4 col-form-label text-md-right">{{ __('Authors') }}</label>
+                        <label for="authors" class="col-md-3 col-form-label text-md-right">{{ __('Authors') }}</label>
 
-                        <div class="col-md-6">
+                        <div class="col-md-9">
                             <input id="authors" type="text" class="form-control @error('authors') is-invalid @enderror" name="authors" value="{{ old('authors') }}" required>
 
                             @error('authors')
@@ -41,9 +46,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="pages" class="col-md-4 col-form-label text-md-right">{{ __('Pages') }}</label>
+                        <label for="pages" class="col-md-3 col-form-label text-md-right">{{ __('Pages') }}</label>
 
-                        <div class="col-md-6">
+                        <div class="col-md-9">
                             <input id="pages" type="text" class="form-control @error('pages') is-invalid @enderror" name="pages" value="{{ old('pages') }}" required>
 
                             @error('pages')
@@ -54,9 +59,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="file" class="col-md-4 col-form-label text-md-right">{{ __('File') }}</label>
+                        <label for="file" class="col-md-3 col-form-label text-md-right">{{ __('File') }}</label>
 
-                        <div class="col-md-6">
+                        <div class="col-md-9">
                             <input id="file" type="file" class="form-control @error('file') is-invalid @enderror" name="file" value="{{ old('file') }}" required>
 
                             @error('file')
@@ -67,9 +72,48 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="submit" class="col-md-4 col-form-label"></label>
+                        <label for="abstract" class="col-md-3 col-form-label text-md-right">{{ __('Abstract') }}</label>
+                        <div class="col-md-9">
+                            <div id="quill_abstract" class="quill_text_editor"></div>
+                            <textarea style="display:none" id="abstract" name="abstract"></textarea>
+                            @error('abstract')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group row">
+                        <label for="keywords" class="col-md-3 col-form-label text-md-right">{{ __('Keywords') }}</label>
 
-                        <div class="col-md-6">
+                        <div class="col-md-9">
+                            <input id="keywords" type="text" class="form-control @error('keywords') is-invalid @enderror" name="keywords" value="{{ old('keywords') }}" required>
+
+                            @error('keywords')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="how_to_cite" class="col-md-3 col-form-label text-md-right">{{ __('How to Cite') }}</label>
+                        <div class="col-md-9">
+                            <div id="quill_how_to_cite" class="quill_text_editor"></div>
+                            <textarea style="display:none;" id="how_to_cite" name="how_to_cite"></textarea>
+                            @error('how_to_cite')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group row">
+                        <div class="col-12">
                             <input type="submit" class="btn btn-primary float-right" value="UPLOAD">
                         </div>
                     </div>
@@ -80,3 +124,23 @@
 </div>
 
 @endsection
+
+@section('js')
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+    $(document).ready(function(){
+        var quill_abstract = new Quill('#quill_abstract', {
+            theme: 'snow'
+        });
+
+        var quill_how_to_cite = new Quill('#quill_how_to_cite', {
+            theme: 'snow'
+        });
+
+        $('#form-archive-create').on('submit', function(){
+            $("#abstract").val($("#quill_abstract .ql-editor").html());
+            $("#how_to_cite").val($("#quill_how_to_cite .ql-editor").html());
+        })
+    })
+</script>
+@append
